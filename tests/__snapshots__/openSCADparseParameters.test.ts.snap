@@ -1,0 +1,411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing parameter parsing of openscad scripts testing checkbox.scad: checkbox.scad 1`] = `
+[
+  {
+    "name": "Variable",
+    "type": "boolean",
+    "value": true,
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad: dropDownBox.scad 1`] = `
+[
+  {
+    "name": "Numbers",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "Strings",
+    "type": "string",
+    "value": "foo",
+  },
+  {
+    "name": "Labeled_values",
+    "type": "number",
+    "value": 10,
+  },
+  {
+    "name": "Labeled_value",
+    "type": "string",
+    "value": "S",
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing example1.scad: example1.scad 1`] = `
+[
+  {
+    "name": "Numbers",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "Strings",
+    "type": "string",
+    "value": "foo",
+  },
+  {
+    "name": "Labeled_values",
+    "type": "number",
+    "value": 10,
+  },
+  {
+    "name": "Labeled_value",
+    "type": "string",
+    "value": "S",
+  },
+  {
+    "name": "slider",
+    "type": "number",
+    "value": 34,
+  },
+  {
+    "name": "stepSlider",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "Variable",
+    "type": "boolean",
+    "value": true,
+  },
+  {
+    "name": "Spinbox",
+    "type": "number",
+    "value": 5,
+  },
+  {
+    "name": "Vector6",
+    "type": "string",
+    "value": "[12,34,44,43,23,23]",
+  },
+  {
+    "name": "String",
+    "type": "string",
+    "value": "hello",
+  },
+  {
+    "name": "Vector1",
+    "type": "string",
+    "value": "[12]",
+  },
+  {
+    "name": "Vector2",
+    "type": "string",
+    "value": "[12,34]",
+  },
+  {
+    "name": "Vector3",
+    "type": "string",
+    "value": "[12,34,46]",
+  },
+  {
+    "name": "Vector4",
+    "type": "string",
+    "value": "[12,34,46,24]",
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing printables-513382.scad: printables-513382.scad 1`] = `
+[
+  {
+    "name": "segment_heights",
+    "type": "string",
+    "value": "[35, 35, 35, 35, 35]",
+  },
+  {
+    "name": "segment_diameters",
+    "type": "string",
+    "value": "[140, 100, 120, 90, 110, 90]",
+  },
+  {
+    "name": "twig_shape",
+    "type": "string",
+    "value": "circle",
+  },
+  {
+    "name": "twig_twist",
+    "type": "string",
+    "value": "[25, 25, 25, 0, 25]",
+  },
+  {
+    "name": "twig_counter_twist",
+    "type": "string",
+    "value": "[25, 25, 25, 0, 25]",
+  },
+  {
+    "name": "twig_diameter",
+    "type": "number",
+    "value": 3,
+  },
+  {
+    "name": "twig_count",
+    "type": "number",
+    "value": 25,
+  },
+  {
+    "name": "twig_counter_count",
+    "type": "number",
+    "value": 25,
+  },
+  {
+    "name": "top_height",
+    "type": "number",
+    "value": 15,
+  },
+  {
+    "name": "bottom_height",
+    "type": "number",
+    "value": 5,
+  },
+  {
+    "name": "socket_diameter",
+    "type": "number",
+    "value": 81,
+  },
+  {
+    "name": "socket_step_top_offset",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "socket_step_height",
+    "type": "number",
+    "value": 2.5,
+  },
+  {
+    "name": "socket_step_diameter",
+    "type": "number",
+    "value": 87,
+  },
+  {
+    "name": "override_values",
+    "type": "boolean",
+    "value": false,
+  },
+  {
+    "name": "seed",
+    "type": "number",
+    "value": 1.1,
+  },
+  {
+    "name": "min_max_segment_count",
+    "type": "string",
+    "value": "[2, 5]",
+  },
+  {
+    "name": "min_max_heights",
+    "type": "string",
+    "value": "[0, 180]",
+  },
+  {
+    "name": "min_max_diameters",
+    "type": "string",
+    "value": "[100, 180]",
+  },
+  {
+    "name": "min_max_twig_twist",
+    "type": "string",
+    "value": "[0, 180]",
+  },
+  {
+    "name": "min_max_twig_diameter",
+    "type": "string",
+    "value": "[2, 20]",
+  },
+  {
+    "name": "min_max_twig_count",
+    "type": "string",
+    "value": "[5, 15]",
+  },
+  {
+    "name": "shell_fn",
+    "type": "number",
+    "value": 5,
+  },
+  {
+    "name": "show_labels",
+    "type": "boolean",
+    "value": false,
+  },
+  {
+    "name": "show_parameters",
+    "type": "boolean",
+    "value": false,
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing printables-682650.scad: printables-682650.scad 1`] = `
+[
+  {
+    "name": "length",
+    "type": "number",
+    "value": 180,
+  },
+  {
+    "name": "depth",
+    "type": "number",
+    "value": 180,
+  },
+  {
+    "name": "use_backplate",
+    "type": "boolean",
+    "value": false,
+  },
+  {
+    "name": "cube_length",
+    "type": "number",
+    "value": 20,
+  },
+  {
+    "name": "cube_depth",
+    "type": "number",
+    "value": 20,
+  },
+  {
+    "name": "cube_min_height",
+    "type": "number",
+    "value": 5,
+  },
+  {
+    "name": "cube_max_height",
+    "type": "number",
+    "value": 80,
+  },
+  {
+    "name": "cube_wall_thickness",
+    "type": "number",
+    "value": 1,
+  },
+  {
+    "name": "cube_top_thickness",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "seed_value",
+    "type": "string",
+    "value": "-1",
+  },
+  {
+    "name": "use_hanging_holes",
+    "type": "boolean",
+    "value": true,
+  },
+  {
+    "name": "wall_hole_thickness",
+    "type": "number",
+    "value": 1,
+  },
+  {
+    "name": "wall_hole_center_size",
+    "type": "number",
+    "value": 7,
+  },
+  {
+    "name": "wall_hole_screw_d",
+    "type": "number",
+    "value": 3,
+  },
+  {
+    "name": "wall_screw_head_size",
+    "type": "number",
+    "value": 3,
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing slider.scad: slider.scad 1`] = `
+[
+  {
+    "name": "sliderWithMax",
+    "type": "number",
+    "value": 34,
+  },
+  {
+    "name": "sliderWithRange",
+    "type": "number",
+    "value": 34,
+  },
+  {
+    "name": "stepSlider",
+    "type": "number",
+    "value": 2,
+  },
+  {
+    "name": "sliderCentered",
+    "type": "number",
+    "value": 0,
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing specialVector.scad: specialVector.scad 1`] = `
+[
+  {
+    "name": "Vector2",
+    "type": "string",
+    "value": "[12,34]",
+  },
+  {
+    "name": "Vector3",
+    "type": "string",
+    "value": "[12,34,45]",
+  },
+  {
+    "name": "Vector4",
+    "type": "string",
+    "value": "[12,34,45,23]",
+  },
+  {
+    "name": "VectorRange3",
+    "type": "string",
+    "value": "[12,34,46]",
+  },
+  {
+    "name": "VectorRange4",
+    "type": "string",
+    "value": "[12,34,45,23]",
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing spinbox.scad: spinbox.scad 1`] = `
+[
+  {
+    "name": "Spinbox",
+    "type": "number",
+    "value": 5,
+  },
+  {
+    "name": "Spinbox",
+    "type": "number",
+    "value": 5.5,
+  },
+]
+`;
+
+exports[`testing parameter parsing of openscad scripts testing testbox.scad: testbox.scad 1`] = `
+[
+  {
+    "name": "Vector6",
+    "type": "string",
+    "value": "[12,34,44,43,23,23]",
+  },
+  {
+    "name": "String",
+    "type": "string",
+    "value": "hello",
+  },
+  {
+    "name": "String",
+    "type": "string",
+    "value": "length",
+  },
+]
+`;

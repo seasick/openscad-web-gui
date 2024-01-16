@@ -1,0 +1,20 @@
+# Dependency directories
+/node_modules
+
+# Build output
+/dist
+
+# Environment variables
+.env
+
+# Editor directories and files
+/.vscode
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ignore vendor files
+/src/vendor
