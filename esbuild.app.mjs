@@ -29,8 +29,8 @@ export default {
     }),
     replace({
       __TRACKER_SNIPPET: process.env.TRACKER_SNIPPET || '',
-      __GITHUB_ISSUE_URL: process.env.GITHUB_ISSUE_URL || '',
-      __GITHUB_REPO_URL: process.env.GITHUB_REPO_URL || '',
+      __GITHUB_ISSUE_URL: process.env.GH_ISSUE_URL || '',
+      __GITHUB_REPO_URL: process.env.GH_REPO_URL || '',
     }),
   ],
 };
