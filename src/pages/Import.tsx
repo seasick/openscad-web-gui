@@ -49,8 +49,6 @@ export default function Import({ error }: Props) {
     return <div>No scad files found at the provided URL</div>;
   }
 
-  console.log(result);
-
   // If we have more then one result, we need to ask the user which one they want to use
   return (
     <div>
