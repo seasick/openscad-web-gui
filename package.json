@@ -1,7 +1,7 @@
 {
-  "name": "3mf-color-changer",
+  "name": "openscad-web-gui",
   "version": "0.0.1",
-  "description": "Web Tool for changing the color of objects in 3mf files",
+  "description": "Web GUI for Openscad WASM",
   "author": "",
   "browser": "src/app.tsx",
   "scripts": {
