@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import React, { useMemo } from 'react';
 import { StlViewer } from 'react-stl-viewer';
 
@@ -5,6 +6,7 @@ import { useOpenSCADProvider } from './OpenscadWorkerProvider';
 
 export default function Preview() {
   const { previewFile } = useOpenSCADProvider();
+  const theme = useTheme();
   const url = useMemo(() => {
     if (!previewFile) {
       return null;
@@ -33,7 +35,7 @@ export default function Preview() {
         shadows
         showAxes
         modelProps={{
-          color: '#B9DDDD',
+          color: theme.palette.primary.main,
         }}
         url={url}
       />
