@@ -14,7 +14,6 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import ImportFromUrlDialog from './Layout/ImportFromUrlDialog';
 
-const drawerWidth = 340;
 const toolbarHeight = 64; // TODO Will this work everywhere?
 
 type Props = {

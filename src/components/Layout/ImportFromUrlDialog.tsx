@@ -10,7 +10,7 @@ type Props = {
   onClose: (url?: string) => void;
 };
 
-export default function ImportFromUrlDialog({ onClose }) {
+export default function ImportFromUrlDialog({ onClose }: Props) {
   const [url, setUrl] = useState('');
 
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {

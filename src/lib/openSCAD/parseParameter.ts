@@ -1,8 +1,6 @@
-import parser from 'openscad-parser';
-
 export type Parameter = {
   name: string;
-  type: any;
+  type: 'string' | 'number' | 'boolean';
   value: string | boolean | number;
   description?: string;
 };
@@ -34,7 +32,10 @@ export default function parseParameters(script: string) {
   return parameters;
 }
 
-function convertType(rawValue) {
+function convertType(rawValue): {
+  value: string | boolean | number;
+  type: 'string' | 'number' | 'boolean';
+} {
   if (/^\d+(\.\d+)?$/.test(rawValue)) {
     return { value: parseFloat(rawValue), type: 'number' };
   } else if (rawValue === 'true' || rawValue === 'false') {

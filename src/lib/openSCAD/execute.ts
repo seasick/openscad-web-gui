@@ -9,7 +9,7 @@ export default async function executeOpenSCAD(
   type: 'preview' | 'export',
   code: string,
   fileType: string,
-  params: {}
+  params: OpenSCADWorkerInputMessage['params']
 ): Promise<Output> {
   return new Promise((resolve, reject) => {
     const worker = new Worker('./openSCADWorker.js', { type: 'module' });
