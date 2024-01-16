@@ -32,14 +32,16 @@ const loopAnimation = {
 };
 
 export default function Editor() {
+  const { preview, previewFile, log } = useOpenSCADProvider();
+  const location = useLocation();
+
   const [code, setCode] = React.useState<string>('cube(15, center=true);');
   const [isExporting, setIsExporting] = React.useState<boolean>(false);
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
-  const [mode, setMode] = React.useState<string | null>('editor');
+  const [mode, setMode] = React.useState<string | null>(
+    location.state?.mode || 'editor'
+  );
   const [parameters, setParameters] = React.useState<Parameter[]>([]);
-
-  const { preview, previewFile, log } = useOpenSCADProvider();
-  const location = useLocation();
 
   useEffect(() => {
     if (previewFile) {

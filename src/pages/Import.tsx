@@ -31,6 +31,7 @@ export default function Import({ error }: Props) {
         navigate('/editor', {
           state: {
             file: new File([arrayBuffer], file.url),
+            mode: 'customizer',
           },
         });
       }
