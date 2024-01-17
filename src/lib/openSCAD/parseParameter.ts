@@ -11,11 +11,10 @@ export default function parseParameters(script: string) {
 
   // Limit the script to the upper part of the file. We don't want to parse the
   // entire file, just the parameters. This can be done by searching for the
-  // first occurence of the `module` keyword.
-  const moduleKeywordIndex = script.indexOf('module ');
-  if (moduleKeywordIndex !== -1) {
-    script = script.substring(0, moduleKeywordIndex);
-  }
+  // first occurence of the `module` or `function` keyword.
+  const splitted = script.split(/^(module |function )/m);
+
+  script = splitted[0];
 
   let match;
   while ((match = parameterRegex.exec(script)) !== null) {

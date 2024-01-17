@@ -390,6 +390,26 @@ exports[`testing parameter parsing of openscad scripts testing spinbox.scad: spi
 ]
 `;
 
+exports[`testing parameter parsing of openscad scripts testing splitAfterFunction.scad: splitAfterFunction.scad 1`] = `
+[
+  {
+    "name": "Vector6",
+    "type": "string",
+    "value": "[12,34,44,43,23,23]",
+  },
+  {
+    "name": "String",
+    "type": "string",
+    "value": "hello",
+  },
+  {
+    "name": "String",
+    "type": "string",
+    "value": "length",
+  },
+]
+`;
+
 exports[`testing parameter parsing of openscad scripts testing testbox.scad: testbox.scad 1`] = `
 [
   {
