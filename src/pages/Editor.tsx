@@ -106,7 +106,7 @@ export default function Editor() {
     <Grid container sx={{ height: '100%' }}>
       <Grid
         item
-        xs={5}
+        xs={4}
         sx={{ borderRight: 1, height: '80%', borderColor: '#ccc' }}
       >
         <Stack sx={{ height: '100%' }}>
@@ -125,7 +125,7 @@ export default function Editor() {
           )}
         </Stack>
       </Grid>
-      <Grid item xs={7} sx={{ height: '80%', position: 'relative' }}>
+      <Grid item xs={8} sx={{ height: '80%', position: 'relative' }}>
         <ToggleButtonGroup
           value={mode}
           orientation="vertical"
@@ -149,7 +149,7 @@ export default function Editor() {
       </Grid>
       <Grid
         item
-        xs={5}
+        xs={4}
         sx={{
           height: '20%',
           borderRight: 1,
@@ -200,7 +200,7 @@ export default function Editor() {
       </Grid>
       <Grid
         item
-        xs={7}
+        xs={8}
         sx={{
           height: '20%',
           overflow: 'scroll',
