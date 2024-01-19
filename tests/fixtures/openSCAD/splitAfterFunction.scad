@@ -3,7 +3,7 @@
 //Text box for vector with more than 4 elements
 Vector6=[12,34,44,43,23,23];
 
-// Text box for string
+// Text box for string - this text should not appear in the customizer, because of the duplication
 String="hello";
 
 // Text box for string with length 8

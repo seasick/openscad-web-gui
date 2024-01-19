@@ -3,6 +3,7 @@
 exports[`testing parameter parsing of openscad scripts testing checkbox.scad: checkbox.scad 1`] = `
 [
   {
+    "description": "description",
     "name": "Variable",
     "type": "boolean",
     "value": true,
@@ -13,21 +14,25 @@ exports[`testing parameter parsing of openscad scripts testing checkbox.scad: ch
 exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad: dropDownBox.scad 1`] = `
 [
   {
+    "description": "combo box for number",
     "name": "Numbers",
     "type": "number",
     "value": 2,
   },
   {
+    "description": "combo box for string",
     "name": "Strings",
     "type": "string",
     "value": "foo",
   },
   {
+    "description": "labeled combo box for numbers",
     "name": "Labeled_values",
     "type": "number",
     "value": 10,
   },
   {
+    "description": "labeled combo box for string",
     "name": "Labeled_value",
     "type": "string",
     "value": "S",
@@ -38,71 +43,85 @@ exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad:
 exports[`testing parameter parsing of openscad scripts testing example1.scad: example1.scad 1`] = `
 [
   {
+    "description": "combo box for number",
     "name": "Numbers",
     "type": "number",
     "value": 2,
   },
   {
+    "description": "combo box for string",
     "name": "Strings",
     "type": "string",
     "value": "foo",
   },
   {
+    "description": "labeled combo box for numbers",
     "name": "Labeled_values",
     "type": "number",
     "value": 10,
   },
   {
+    "description": "labeled combo box for string",
     "name": "Labeled_value",
     "type": "string",
     "value": "S",
   },
   {
+    "description": "slider widget for number",
     "name": "slider",
     "type": "number",
     "value": 34,
   },
   {
+    "description": "step slider for number",
     "name": "stepSlider",
     "type": "number",
     "value": 2,
   },
   {
+    "description": "description",
     "name": "Variable",
     "type": "boolean",
     "value": true,
   },
   {
+    "description": "spinbox with step size 1",
     "name": "Spinbox",
     "type": "number",
     "value": 5,
   },
   {
+    "description": "Text box for vector with more than 4 elements",
     "name": "Vector6",
     "type": "string",
     "value": "[12,34,44,43,23,23]",
   },
   {
+    "description": "Text box for string",
     "name": "String",
     "type": "string",
     "value": "hello",
   },
   {
+    "description": "Text box for vector with less than or equal to 4 elements",
     "name": "Vector1",
     "type": "string",
     "value": "[12]",
   },
   {
+    "description": undefined,
     "name": "Vector2",
     "type": "string",
     "value": "[12,34]",
   },
   {
+    "description": undefined,
     "name": "Vector3",
     "type": "string",
     "value": "[12,34,46]",
   },
   {
+    "description": undefined,
     "name": "Vector4",
     "type": "string",
     "value": "[12,34,46,24]",
@@ -113,126 +132,151 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
 exports[`testing parameter parsing of openscad scripts testing printables-513382.scad: printables-513382.scad 1`] = `
 [
   {
+    "description": "How high should each segment be?",
     "name": "segment_heights",
     "type": "string",
     "value": "[35, 35, 35, 35, 35]",
   },
   {
+    "description": "How wide should each segment be?",
     "name": "segment_diameters",
     "type": "string",
     "value": "[140, 100, 120, 90, 110, 90]",
   },
   {
+    "description": "The shape of the twig",
     "name": "twig_shape",
     "type": "string",
     "value": "circle",
   },
   {
+    "description": "How much should the twigs be twisted?",
     "name": "twig_twist",
     "type": "string",
     "value": "[25, 25, 25, 0, 25]",
   },
   {
+    "description": "How much should the twigs in the counter direction be twisted?",
     "name": "twig_counter_twist",
     "type": "string",
     "value": "[25, 25, 25, 0, 25]",
   },
   {
+    "description": "How thick should a twig be?",
     "name": "twig_diameter",
     "type": "number",
     "value": 3,
   },
   {
+    "description": "How many twigs should there be?",
     "name": "twig_count",
     "type": "number",
     "value": 25,
   },
   {
+    "description": "How many twigs should be in the other direction?",
     "name": "twig_counter_count",
     "type": "number",
     "value": 25,
   },
   {
+    "description": "The height of the top ring",
     "name": "top_height",
     "type": "number",
     "value": 15,
   },
   {
+    "description": "The height of the bottom ring",
     "name": "bottom_height",
     "type": "number",
     "value": 5,
   },
   {
+    "description": "How big is the thing you want to put in here?",
     "name": "socket_diameter",
     "type": "number",
     "value": 81,
   },
   {
+    "description": undefined,
     "name": "socket_step_top_offset",
     "type": "number",
     "value": 2,
   },
   {
+    "description": undefined,
     "name": "socket_step_height",
     "type": "number",
     "value": 2.5,
   },
   {
+    "description": undefined,
     "name": "socket_step_diameter",
     "type": "number",
     "value": 87,
   },
   {
+    "description": "Override the general settings and let the randomizer go wild!",
     "name": "override_values",
     "type": "boolean",
     "value": false,
   },
   {
+    "description": "The seed for the random number generator.",
     "name": "seed",
     "type": "number",
     "value": 1.1,
   },
   {
+    "description": "The amount of segments will be chosen between those two numbers.",
     "name": "min_max_segment_count",
     "type": "string",
     "value": "[2, 5]",
   },
   {
+    "description": "The height of each segment is between those two numbers.",
     "name": "min_max_heights",
     "type": "string",
     "value": "[0, 180]",
   },
   {
+    "description": "Min/max of all the diameters.",
     "name": "min_max_diameters",
     "type": "string",
     "value": "[100, 180]",
   },
   {
+    "description": "The amount of twig twist will be between those two numbers.",
     "name": "min_max_twig_twist",
     "type": "string",
     "value": "[0, 180]",
   },
   {
+    "description": "Min/max of the twig diameter.",
     "name": "min_max_twig_diameter",
     "type": "string",
     "value": "[2, 20]",
   },
   {
+    "description": "The twig count of both twig directions will be between those two numbers.",
     "name": "min_max_twig_count",
     "type": "string",
     "value": "[5, 15]",
   },
   {
+    "description": undefined,
     "name": "shell_fn",
     "type": "number",
     "value": 5,
   },
   {
+    "description": undefined,
     "name": "show_labels",
     "type": "boolean",
     "value": false,
   },
   {
+    "description": undefined,
     "name": "show_parameters",
     "type": "boolean",
     "value": false,
@@ -243,76 +287,91 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
 exports[`testing parameter parsing of openscad scripts testing printables-682650.scad: printables-682650.scad 1`] = `
 [
   {
+    "description": "Size of the panel on the x-axis",
     "name": "length",
     "type": "number",
     "value": 180,
   },
   {
+    "description": "Size of the panel on the y-axis",
     "name": "depth",
     "type": "number",
     "value": 180,
   },
   {
+    "description": "Should a backplate be used?",
     "name": "use_backplate",
     "type": "boolean",
     "value": false,
   },
   {
+    "description": "Size of a single cube on the x-axis",
     "name": "cube_length",
     "type": "number",
     "value": 20,
   },
   {
+    "description": "Size of a single cube on the y-axis",
     "name": "cube_depth",
     "type": "number",
     "value": 20,
   },
   {
+    "description": "Minimum height of a single cube",
     "name": "cube_min_height",
     "type": "number",
     "value": 5,
   },
   {
+    "description": "Maximum height of a single cube",
     "name": "cube_max_height",
     "type": "number",
     "value": 80,
   },
   {
+    "description": "Wall thickness of cube",
     "name": "cube_wall_thickness",
     "type": "number",
     "value": 1,
   },
   {
+    "description": "Top perimeter thickness",
     "name": "cube_top_thickness",
     "type": "number",
     "value": 2,
   },
   {
+    "description": "Which seed to use? -1 generates a new layout with each generation",
     "name": "seed_value",
     "type": "string",
     "value": "-1",
   },
   {
+    "description": undefined,
     "name": "use_hanging_holes",
     "type": "boolean",
     "value": true,
   },
   {
+    "description": "The thickness of the baseplate where the opening for the screw/nail is",
     "name": "wall_hole_thickness",
     "type": "number",
     "value": 1,
   },
   {
+    "description": "The diameter of the center hole",
     "name": "wall_hole_center_size",
     "type": "number",
     "value": 7,
   },
   {
+    "description": "The diameter of the screw so it can slide along the hanging hole handles",
     "name": "wall_hole_screw_d",
     "type": "number",
     "value": 3,
   },
   {
+    "description": "The thickness of the head of the screw, so it will fit behind the hole",
     "name": "wall_screw_head_size",
     "type": "number",
     "value": 3,
@@ -323,21 +382,25 @@ exports[`testing parameter parsing of openscad scripts testing printables-682650
 exports[`testing parameter parsing of openscad scripts testing slider.scad: slider.scad 1`] = `
 [
   {
+    "description": "slider widget for number with max. value",
     "name": "sliderWithMax",
     "type": "number",
     "value": 34,
   },
   {
+    "description": "slider widget for number in range",
     "name": "sliderWithRange",
     "type": "number",
     "value": 34,
   },
   {
+    "description": "step slider for number",
     "name": "stepSlider",
     "type": "number",
     "value": 2,
   },
   {
+    "description": "slider widget for number in range",
     "name": "sliderCentered",
     "type": "number",
     "value": 0,
@@ -348,26 +411,31 @@ exports[`testing parameter parsing of openscad scripts testing slider.scad: slid
 exports[`testing parameter parsing of openscad scripts testing specialVector.scad: specialVector.scad 1`] = `
 [
   {
+    "description": "Spin box box for vector with less than or equal to 4 elements",
     "name": "Vector2",
     "type": "string",
     "value": "[12,34]",
   },
   {
+    "description": undefined,
     "name": "Vector3",
     "type": "string",
     "value": "[12,34,45]",
   },
   {
+    "description": undefined,
     "name": "Vector4",
     "type": "string",
     "value": "[12,34,45,23]",
   },
   {
+    "description": undefined,
     "name": "VectorRange3",
     "type": "string",
     "value": "[12,34,46]",
   },
   {
+    "description": undefined,
     "name": "VectorRange4",
     "type": "string",
     "value": "[12,34,45,23]",
@@ -378,11 +446,7 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
 exports[`testing parameter parsing of openscad scripts testing spinbox.scad: spinbox.scad 1`] = `
 [
   {
-    "name": "Spinbox",
-    "type": "number",
-    "value": 5,
-  },
-  {
+    "description": "spinbox with step size 0.5",
     "name": "Spinbox",
     "type": "number",
     "value": 5.5,
@@ -393,16 +457,13 @@ exports[`testing parameter parsing of openscad scripts testing spinbox.scad: spi
 exports[`testing parameter parsing of openscad scripts testing splitAfterFunction.scad: splitAfterFunction.scad 1`] = `
 [
   {
+    "description": "Text box for vector with more than 4 elements",
     "name": "Vector6",
     "type": "string",
     "value": "[12,34,44,43,23,23]",
   },
   {
-    "name": "String",
-    "type": "string",
-    "value": "hello",
-  },
-  {
+    "description": "Text box for string with length 8",
     "name": "String",
     "type": "string",
     "value": "length",
@@ -413,16 +474,13 @@ exports[`testing parameter parsing of openscad scripts testing splitAfterFunctio
 exports[`testing parameter parsing of openscad scripts testing testbox.scad: testbox.scad 1`] = `
 [
   {
+    "description": "Text box for vector with more than 4 elements",
     "name": "Vector6",
     "type": "string",
     "value": "[12,34,44,43,23,23]",
   },
   {
-    "name": "String",
-    "type": "string",
-    "value": "hello",
-  },
-  {
+    "description": "Text box for string with length 8",
     "name": "String",
     "type": "string",
     "value": "length",
