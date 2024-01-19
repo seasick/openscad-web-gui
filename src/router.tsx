@@ -6,7 +6,6 @@ import {
 
 import Layout from './components/Layout';
 import Editor from './pages/Editor';
-import Home from './pages/Home';
 import Import, { loader } from './pages/Import';
 
 export default function RouterProvider() {
@@ -17,7 +16,7 @@ export default function RouterProvider() {
       children: [
         {
           path: '/',
-          element: <Home />,
+          element: <Editor />,
         },
         {
           path: '/import',
