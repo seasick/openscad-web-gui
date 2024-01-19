@@ -17,6 +17,7 @@ const OpenSCADWorkerContext = createContext<{
     params?: OpenSCADWorkerInputMessage['params']
   ) => void;
   previewFile?: File | null;
+  reset?: () => void;
 }>({
   log: [],
 });
@@ -62,6 +63,12 @@ export default function OpenscadWorkerProvider({ children }: Props) {
         ...output.log.stdOut,
       ]);
       setPreviewFile(output.output);
+    },
+
+    reset: () => {
+      setLog([]);
+      setPreviewFile(null);
+      setExportFile(null);
     },
   };
 

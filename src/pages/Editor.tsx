@@ -32,7 +32,7 @@ const loopAnimation = {
 };
 
 export default function Editor() {
-  const { preview, previewFile, log } = useOpenSCADProvider();
+  const { log, preview, previewFile, reset } = useOpenSCADProvider();
   const location = useLocation();
 
   const [code, setCode] = React.useState<string>('cube(15, center=true);');
@@ -74,6 +74,7 @@ export default function Editor() {
 
       if (file) {
         const text = await file.text();
+        reset();
         setCode(text);
       }
     })();
