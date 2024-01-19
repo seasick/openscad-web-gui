@@ -26,7 +26,7 @@ export default function ImportFromUrlDialog({ onClose }: Props) {
   };
 
   return (
-    <Dialog open onClose={handleClose}>
+    <Dialog open onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Import from URL</DialogTitle>
       <DialogContent>
         <TextField
