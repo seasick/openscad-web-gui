@@ -31,9 +31,11 @@ const loopAnimation = {
   },
 };
 
+type EditorMode = 'editor' | 'customizer';
+
 type Props = {
   url?: string;
-  initialMode?: string;
+  initialMode?: EditorMode;
 };
 
 export default function Editor({ url, initialMode }: Props) {
@@ -43,7 +45,7 @@ export default function Editor({ url, initialMode }: Props) {
   const [code, setCode] = React.useState<string>();
   const [isExporting, setIsExporting] = React.useState<boolean>(false);
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
-  const [mode, setMode] = React.useState<string | null>(
+  const [mode, setMode] = React.useState<EditorMode | null>(
     initialMode || 'editor'
   );
   const [parameters, setParameters] = React.useState<Parameter[]>([]);
@@ -78,7 +80,7 @@ export default function Editor({ url, initialMode }: Props) {
 
   const handleMode = (
     event: React.MouseEvent<HTMLElement>,
-    newMode: string | null
+    newMode: EditorMode | null
   ) => {
     if (newMode !== null) {
       setMode(newMode);

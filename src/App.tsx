@@ -61,7 +61,7 @@ export default function App() {
     file = files[selectedIndex].url;
   }
 
-  return <Editor url={file} />;
+  return <Editor url={file} initialMode={file ? 'customizer' : undefined} />;
 }
 
 function getImportUrl(): string | undefined {
