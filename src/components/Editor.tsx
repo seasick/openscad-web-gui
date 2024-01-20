@@ -2,6 +2,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import LoopIcon from '@mui/icons-material/Loop';
 import TuneIcon from '@mui/icons-material/Tune';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -165,6 +166,28 @@ export default function Editor({ url, initialMode }: Props) {
             <TuneIcon />
           </ToggleButton>
         </ToggleButtonGroup>
+        {isRendering && (
+          <div
+            style={{
+              zIndex: 999,
+              position: 'absolute',
+              height: '100%',
+              width: '100%',
+              backgroundColor: 'rgba(255,255,255,0.5)',
+            }}
+          >
+            <div
+              style={{
+                top: '50%',
+                left: '50%',
+                position: 'absolute',
+                transform: 'translate(-50%,-50%)',
+              }}
+            >
+              <CircularProgress />
+            </div>
+          </div>
+        )}
         <Preview />
       </Grid>
       <Grid
