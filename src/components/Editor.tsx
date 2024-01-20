@@ -70,8 +70,7 @@ export default function Editor({ url, initialMode }: Props) {
     setIsRendering(true);
     try {
       await preview!(code, parameters);
-      setIsRendering(false);
-    } catch (err) {
+    } finally {
       setIsRendering(false);
     }
   };
