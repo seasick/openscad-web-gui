@@ -25,6 +25,7 @@ export default function CodeEditor({
           width: '100%',
           flexGrow: 1,
           resize: 'none',
+          padding: 12,
           backgroundColor: disabled ? '#ccc' : '#fff',
         }}
       />
