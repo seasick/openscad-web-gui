@@ -56,8 +56,6 @@ export default function Editor({ url, initialMode }: Props) {
         const codeResponse = await fetch(url);
         const codeBody = await codeResponse.text();
         setCode(codeBody);
-        await preview!(codeBody, parameters);
-        setIsRendering(false);
       })();
     }
   }, [url]);
