@@ -31,6 +31,7 @@ export default {
       __TRACKER_SNIPPET: process.env.TRACKER_SNIPPET || '',
       __GITHUB_ISSUE_URL: process.env.GH_ISSUE_URL || '',
       __GITHUB_REPO_URL: process.env.GH_REPO_URL || '',
+      __WEBSITE_URL: process.env.WEBSITE_URL || 'http://localhost:8000/',
     }),
   ],
 };

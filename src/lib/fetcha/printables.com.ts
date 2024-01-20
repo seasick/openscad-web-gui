@@ -1,5 +1,12 @@
 import { FetchaFile } from '../fetcha';
 
+type Stl = {
+  id: number;
+  name: string;
+  fileSize: number;
+  // filePreviewPath: string; // Always empty in my tests
+};
+
 export default async function printablesComFetcha(
   url: string,
   fileNameFilter?: string
@@ -48,7 +55,7 @@ export default async function printablesComFetcha(
   // Iterate the stls and start getting the download links for them
   const downloadLinkPromises = printProfile.data.print.stls
     .filter((stl) => stl.name.match(fileNameFilter || '')) // Filter out files that don't match the filter
-    .map((stl) => addDownloadLink(stl.id, id, stl.name));
+    .map((stl) => addDownloadLink(stl, id));
 
   // Wait for all the download links to be fetched
   const downloadLinks = await Promise.all(downloadLinkPromises);
@@ -56,11 +63,7 @@ export default async function printablesComFetcha(
   return downloadLinks;
 }
 
-async function addDownloadLink(
-  id: number,
-  printId: number,
-  name: string
-): Promise<FetchaFile> {
+async function addDownloadLink(stl: Stl, printId: number): Promise<FetchaFile> {
   const response = await fetch(
     `https://corsproxy.io/?${encodeURIComponent(
       'https://api.printables.com/graphql/'
@@ -75,7 +78,7 @@ async function addDownloadLink(
       body: JSON.stringify({
         operationName: 'GetDownloadLink',
         variables: {
-          id,
+          id: stl.id,
           fileType: 'stl', // It doesn't matter if we use `stl` and download a .scad file
           printId,
           source: 'model_detail',
@@ -91,7 +94,8 @@ async function addDownloadLink(
   const json = await response.json();
 
   return {
-    name,
+    description: `Printables.com - ${stl.fileSize} bytes`,
+    name: stl.name,
     url: json.data.getDownloadLink.output.link,
   };
 }

@@ -3,6 +3,7 @@ import printablesComFetcha from './fetcha/printables.com';
 export type FetchaFile = {
   name: string;
   url: string;
+  description?: string;
 };
 
 export default async function fetcha(url: string): Promise<FetchaFile[]> {
@@ -14,7 +15,7 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
     case 'printables.com':
     case 'www.printables.com':
       return await printablesComFetcha(url, '.scad');
-    default:
+    default: {
       const urlParts = url.split('/');
 
       let fileName = 'unknown';
@@ -28,5 +29,6 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
           url: 'https://corsproxy.io/?' + encodeURIComponent(url),
         },
       ];
+    }
   }
 }

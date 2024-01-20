@@ -7,17 +7,16 @@ import Stack from '@mui/material/Stack';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
-import CodeEditor from '../components/CodeEditor';
-import Customizer from '../components/Customizer';
-import { useOpenSCADProvider } from '../components/OpenscadWorkerProvider';
-import Preview from '../components/Preview';
-import SplitButton from '../components/SplitButton';
 import executeOpenSCAD from '../lib/openSCAD/execute';
 import parseOpenScadParameters, {
   Parameter,
 } from '../lib/openSCAD/parseParameter';
+import CodeEditor from './CodeEditor';
+import Customizer from './Customizer';
+import { useOpenSCADProvider } from './OpenscadWorkerProvider';
+import Preview from './Preview';
+import SplitButton from './SplitButton';
 
 const loopAnimation = {
   animation: 'spin 2s linear infinite',
@@ -31,18 +30,34 @@ const loopAnimation = {
   },
 };
 
-export default function Editor() {
-  const { log, preview, previewFile, reset } = useOpenSCADProvider();
-  const location = useLocation();
+type Props = {
+  url?: string;
+  initialMode?: string;
+};
+
+export default function Editor({ url, initialMode }: Props) {
+  const { log, preview, previewFile } = useOpenSCADProvider();
 
   const logRef = React.useRef<HTMLPreElement>(null);
-  const [code, setCode] = React.useState<string>('cube(15, center=true);');
+  const [code, setCode] = React.useState<string>();
   const [isExporting, setIsExporting] = React.useState<boolean>(false);
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
   const [mode, setMode] = React.useState<string | null>(
-    location.state?.mode || 'editor'
+    initialMode || 'editor'
   );
   const [parameters, setParameters] = React.useState<Parameter[]>([]);
+
+  useEffect(() => {
+    if (url) {
+      (async () => {
+        const codeResponse = await fetch(url);
+        const codeBody = await codeResponse.text();
+        setCode(codeBody);
+        await preview!(codeBody, parameters);
+        setIsRendering(false);
+      })();
+    }
+  }, [url]);
 
   useEffect(() => {
     if (previewFile) {
@@ -69,21 +84,12 @@ export default function Editor() {
     }
   };
 
-  // Load file into text editor
-  useEffect(() => {
-    (async () => {
-      const file = location.state?.file;
-
-      if (file) {
-        const text = await file.text();
-        reset();
-        setCode(text);
-      }
-    })();
-  }, [location]);
-
   // Whenever the code changes, attempt to parse the parameters
   useEffect(() => {
+    if (!code) {
+      return;
+    }
+
     const newParams = parseOpenScadParameters(code);
     // Add old values to new params
     if (parameters.length) {

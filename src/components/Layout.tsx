@@ -10,7 +10,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import ImportFromUrlDialog from './Layout/ImportFromUrlDialog';
 
@@ -18,12 +17,12 @@ const toolbarHeight = 64; // TODO Will this work everywhere?
 
 type Props = {
   title: string;
+  children: React.ReactNode;
 };
 
-export default function Layout({ title }: Props) {
+export default function Layout({ title, children }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showImportDialog, setShowImportDialog] = React.useState(false);
-  const navigate = useNavigate();
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,9 +31,6 @@ export default function Layout({ title }: Props) {
   const handleClose = (e) => {
     setAnchorEl(null);
     switch (e.target.id) {
-      case 'new':
-        navigate('/editor');
-        break;
       case 'import_from_url':
         setShowImportDialog(true);
         break;
@@ -67,9 +63,6 @@ export default function Layout({ title }: Props) {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem onClick={handleClose} id="new">
-              New
-            </MenuItem>
             <MenuItem onClick={handleClose} id="import_from_url">
               Import from URL
             </MenuItem>
@@ -84,13 +77,13 @@ export default function Layout({ title }: Props) {
           <Typography
             variant="h6"
             noWrap
-            component={Link}
+            component="a"
             sx={{
               textDecoration: 'none',
               boxShadow: 'none',
               color: 'white',
             }}
-            to="/"
+            href="__WEBSITE_URL"
           >
             {title}
           </Typography>
@@ -127,7 +120,7 @@ export default function Layout({ title }: Props) {
             overflow: 'auto',
           }}
         >
-          <Outlet />
+          {children}
         </Box>
       </Box>
     </Box>
