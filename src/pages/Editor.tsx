@@ -98,6 +98,10 @@ export default function Editor() {
     }
     setParameters(newParams);
 
+    if (mode === 'customizer' && (!newParams || !newParams.length)) {
+      setMode('editor');
+    }
+
     // Render the preview if we have code and we don't have a previewFile yet
     if (code && !previewFile && !isRendering) {
       handleRender();
