@@ -146,7 +146,7 @@ export default function Editor() {
           exclusive
           onChange={handleMode}
           aria-label="text alignment"
-          sx={{ position: 'absolute', top: 0, left: 0, zIndex: 999 }}
+          sx={{ position: 'absolute', top: 5, left: 5, zIndex: 999 }}
         >
           <ToggleButton value="editor" aria-label="left aligned">
             <CodeIcon />
