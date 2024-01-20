@@ -15,6 +15,18 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
     case 'www.printables.com':
       return await printablesComFetcha(url, '.scad');
     default:
-      throw new Error(`Unknown host ${host}`);
+      const urlParts = url.split('/');
+
+      let fileName = 'unknown';
+      if (urlParts.length > 0) {
+        fileName = urlParts[urlParts.length - 1];
+      }
+
+      return [
+        {
+          name: fileName,
+          url,
+        },
+      ];
   }
 }
