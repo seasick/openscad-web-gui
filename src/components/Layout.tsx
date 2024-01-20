@@ -76,11 +76,8 @@ export default function Layout({ title }: Props) {
           </Menu>
           {showImportDialog && (
             <ImportFromUrlDialog
-              onClose={(url) => {
+              onClose={() => {
                 setShowImportDialog(false);
-                if (url) {
-                  navigate('/import?url=' + url);
-                }
               }}
             />
           )}
