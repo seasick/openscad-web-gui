@@ -25,7 +25,7 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
       return [
         {
           name: fileName,
-          url,
+          url: 'https://corsproxy.io/?' + encodeURIComponent(url),
         },
       ];
   }

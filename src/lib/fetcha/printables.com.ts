@@ -16,7 +16,9 @@ export default async function printablesComFetcha(
   const id: number = parseInt(idString, 10);
 
   const printProfileResponse = await fetch(
-    'https://corsproxy.io/?https://api.printables.com/graphql/',
+    `https://corsproxy.io/?${encodeURIComponent(
+      'https://api.printables.com/graphql/'
+    )}`,
     {
       headers: {
         Accept: 'application/json',
@@ -60,7 +62,9 @@ async function addDownloadLink(
   name: string
 ): Promise<FetchaFile> {
   const response = await fetch(
-    'https://corsproxy.io/?https://api.printables.com/graphql/',
+    `https://corsproxy.io/?${encodeURIComponent(
+      'https://api.printables.com/graphql/'
+    )}`,
     {
       headers: {
         Accept: 'application/json',
