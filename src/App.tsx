@@ -41,6 +41,14 @@ export default function App() {
     );
   }
 
+  if (importUrl && files.length === 0) {
+    return (
+      <MyBox>
+        <ErrorBox error={new Error(`No files found at ${importUrl}`)} />
+      </MyBox>
+    );
+  }
+
   // If there are multiple files, let the user select the one to import.
   if (files.length > 1 && selectedIndex === undefined) {
     return (
