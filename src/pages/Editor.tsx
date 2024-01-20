@@ -35,6 +35,7 @@ export default function Editor() {
   const { log, preview, previewFile, reset } = useOpenSCADProvider();
   const location = useLocation();
 
+  const logRef = React.useRef<HTMLPreElement>(null);
   const [code, setCode] = React.useState<string>('cube(15, center=true);');
   const [isExporting, setIsExporting] = React.useState<boolean>(false);
   const [isRendering, setIsRendering] = React.useState<boolean>(false);
@@ -107,6 +108,13 @@ export default function Editor() {
       handleRender();
     }
   }, [code]);
+
+  // Scroll to bottom of log
+  useEffect(() => {
+    if (logRef.current) {
+      logRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [log]);
 
   return (
     <Grid container sx={{ height: '100%' }}>
@@ -215,7 +223,10 @@ export default function Editor() {
           borderColor: '#ccc',
         }}
       >
-        <pre style={{ padding: 5, margin: 0 }}>{log?.join('\n')}</pre>
+        <pre style={{ padding: 5, margin: 0 }}>
+          {log?.join('\n')}
+          <span ref={logRef} />
+        </pre>
       </Grid>
     </Grid>
   );
