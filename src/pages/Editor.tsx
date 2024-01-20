@@ -53,6 +53,7 @@ export default function Editor() {
     setIsRendering(true);
     try {
       await preview!(code, parameters);
+      setIsRendering(false);
     } catch (err) {
       setIsRendering(false);
     }

@@ -48,7 +48,10 @@ export default function OpenscadWorkerProvider({ children }: Props) {
         ...output.log.stdErr,
         ...output.log.stdOut,
       ]);
-      setExportFile(output.output);
+
+      if (output.output) {
+        setExportFile(output.output);
+      }
     },
 
     preview: async (
@@ -62,7 +65,10 @@ export default function OpenscadWorkerProvider({ children }: Props) {
         ...output.log.stdErr,
         ...output.log.stdOut,
       ]);
-      setPreviewFile(output.output);
+
+      if (output.output) {
+        setPreviewFile(output.output);
+      }
     },
 
     reset: () => {

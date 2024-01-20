@@ -109,10 +109,12 @@ async function executeOpenscad(
     throw new Error('OpenSCAD exited with an error: ' + error.message);
   }
 
-  try {
-    output = instance.FS.readFile(outputFile);
-  } catch (error) {
-    throw new Error('OpenSCAD cannot read created file: ' + error.message);
+  if (exitCode === 0) {
+    try {
+      output = instance.FS.readFile(outputFile);
+    } catch (error) {
+      throw new Error('OpenSCAD cannot read created file: ' + error.message);
+    }
   }
 
   return { output, exitCode, duration: Date.now() - start, log };

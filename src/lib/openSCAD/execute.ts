@@ -23,7 +23,7 @@ export default async function executeOpenSCAD(
         console.debug(log);
 
         resolve({
-          output: new File([output], 'result.' + fileType),
+          output: output ? new File([output], 'result.' + fileType) : null,
           exitCode,
           duration,
           log,
