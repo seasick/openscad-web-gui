@@ -471,6 +471,39 @@ exports[`testing parameter parsing of openscad scripts testing slider.scad: slid
 ]
 `;
 
+exports[`testing parameter parsing of openscad scripts testing specialChars.scad: specialChars.scad 1`] = `
+[
+  {
+    "description": undefined,
+    "group": "Settings",
+    "name": "$fn",
+    "type": "number",
+    "value": 200,
+  },
+  {
+    "description": undefined,
+    "group": "Settings",
+    "name": "width",
+    "type": "number",
+    "value": 30,
+  },
+  {
+    "description": undefined,
+    "group": "Settings",
+    "name": "length",
+    "type": "number",
+    "value": 50,
+  },
+  {
+    "description": undefined,
+    "group": "Hidden",
+    "name": "height",
+    "type": "number",
+    "value": 10,
+  },
+]
+`;
+
 exports[`testing parameter parsing of openscad scripts testing specialVector.scad: specialVector.scad 1`] = `
 [
   {

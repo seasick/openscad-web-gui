@@ -13,7 +13,7 @@ export default function parseParameters(script: string): Parameter[] {
   script = script.split(/^(module |function )/m)[0];
 
   const parameters: Record<string, Parameter> = {};
-  const parameterRegex = /^(\w+)\s*=\s*([^;]+)/gm; // TODO: Use AST parser instead of regex
+  const parameterRegex = /^([a-z0-9A-Z_\$]+)\s*=\s*([^;]+)/gm; // TODO: Use AST parser instead of regex
   const groupRegex = /^\/\*\s*\[([^\]]+)\]\s*\*\//gm;
 
   const groupSections: { id: string; group: string; code: string }[] = [];
