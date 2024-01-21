@@ -47,6 +47,9 @@ jobs:
           NODE_ENV=production npm run build
         env:
           TRACKER_SNIPPET: ${{ vars.TRACKER_SNIPPET }}
+          GH_ISSUE_URL: ${{ vars.GH_ISSUE_URL }}
+          GH_REPO_URL: ${{ vars.GH_REPO_URL }}
+          WEBSITE_URL: ${{ vars.WEBSITE_URL }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
