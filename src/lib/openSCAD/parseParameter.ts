@@ -85,6 +85,17 @@ export default function parseParameters(script: string): Parameter[] {
       let options: ParameterOption[];
       let range: ParameterRange;
 
+      // Check if the value is another variable or an expression. If so, we can continue to the next
+      // parameter because everything after this variable (including itself) is not a parameter. Also
+      // check if the value is a string that contains a newline. If so, we will also abort the parsing
+      if (
+        value !== 'true' && // true and false are valid values
+        value !== 'false' &&
+        (value.match(/^[a-zA-Z_]/) || value.split('\n').length > 1)
+      ) {
+        continue;
+      }
+
       if (match[3]) {
         const rawComment = match[3].replace(/^\/\/\s*/, '').trim();
         const cleaned = rawComment.replace(/^\[+|\]+$/g, '');
