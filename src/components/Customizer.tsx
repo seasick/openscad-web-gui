@@ -50,51 +50,56 @@ export default function Customizer({ parameters, onChange }: Props) {
 
   return (
     <div style={{ height: '100%', overflow: 'scroll' }}>
-      {Object.entries(groups).map(([groupName, groupParams], idx) => (
-        <Accordion defaultExpanded={idx === 0} key={idx}>
-          <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-            {groupName}
-          </AccordionSummary>
-          <AccordionDetails>
-            {groupParams.map((parameter) => {
-              if (parameter.type === 'number' || parameter.type === 'string') {
-                return (
-                  <TextField
-                    label={parameter.description || parameter.name}
-                    fullWidth
-                    type={parameter.type}
-                    key={parameter.name}
-                    name={parameter.name}
-                    onChange={handleParameterChange(false)}
-                    value={parameter.value}
-                    sx={{ mt: 2, p: 1 }}
-                  />
-                );
-              } else if (parameter.type === 'boolean') {
-                return (
-                  <FormGroup key={parameter.name}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name={parameter.name}
-                          onChange={handleParameterChange(true)}
-                          checked={parameter.value === true}
-                        />
-                      }
+      {Object.entries(groups)
+        .filter((x) => x[0].toLowerCase() !== 'hidden')
+        .map(([groupName, groupParams], idx) => (
+          <Accordion defaultExpanded={idx === 0} key={idx}>
+            <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+              {groupName}
+            </AccordionSummary>
+            <AccordionDetails>
+              {groupParams.map((parameter) => {
+                if (
+                  parameter.type === 'number' ||
+                  parameter.type === 'string'
+                ) {
+                  return (
+                    <TextField
                       label={parameter.description || parameter.name}
+                      fullWidth
+                      type={parameter.type}
+                      key={parameter.name}
+                      name={parameter.name}
+                      onChange={handleParameterChange(false)}
+                      value={parameter.value}
+                      sx={{ mt: 2, p: 1 }}
                     />
-                  </FormGroup>
+                  );
+                } else if (parameter.type === 'boolean') {
+                  return (
+                    <FormGroup key={parameter.name}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            name={parameter.name}
+                            onChange={handleParameterChange(true)}
+                            checked={parameter.value === true}
+                          />
+                        }
+                        label={parameter.description || parameter.name}
+                      />
+                    </FormGroup>
+                  );
+                }
+                return (
+                  <div key={parameter.name}>
+                    {parameter.name} {parameter.type}
+                  </div>
                 );
-              }
-              return (
-                <div key={parameter.name}>
-                  {parameter.name} {parameter.type}
-                </div>
-              );
-            })}
-          </AccordionDetails>
-        </Accordion>
-      ))}
+              })}
+            </AccordionDetails>
+          </Accordion>
+        ))}
     </div>
   );
 }
