@@ -32,6 +32,9 @@ async function exportFile(
   fileType = 'stl'
 ): Promise<OpenSCADWorkerOutputMessage> {
   const parameters = params.map(({ name, value }) => {
+    if (typeof value === 'string') {
+      value = escapeShell(value);
+    }
     return `-D${name}=${value}`;
   });
 
@@ -51,6 +54,9 @@ async function preview(
   fileType = 'stl'
 ): Promise<OpenSCADWorkerOutputMessage> {
   const parameters = params.map(({ name, value }) => {
+    if (typeof value === 'string') {
+      value = escapeShell(value);
+    }
     return `-D${name}=${value}`;
   });
 
@@ -118,4 +124,8 @@ async function executeOpenscad(
   }
 
   return { output, exitCode, duration: Date.now() - start, log };
+}
+
+function escapeShell(cmd: string) {
+  return '"' + cmd.replace(/(["'$`\\])/g, '\\$1') + '"';
 }
