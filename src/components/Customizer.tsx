@@ -20,20 +20,39 @@ type Props = {
 };
 
 export default function Customizer({ parameters, onChange }: Props) {
-  const handleParameterChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    newValue?
-  ) => {
+  const changeParameter = (name: string, newValue?) => {
     const newParameters = parameters.map((parameter) => {
-      if (parameter.name === event.target.name) {
+      if (parameter.name === name) {
+        if (parameter.type === 'number') {
+          newValue = Number(newValue);
+        }
+
         return {
           ...parameter,
-          value: newValue || event.target.value,
+          value: newValue,
         };
       }
       return parameter;
     });
     onChange(newParameters);
+  };
+
+  const handleParameterChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    newValue?
+  ) => {
+    changeParameter(event.target.name, event.target.value);
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    changeParameter(event.target.name, event.target.checked);
+  };
+
+  const handleAutocompleteChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    newValue?
+  ) => {
+    changeParameter(event.target.name, newValue);
   };
 
   // Group parameters
@@ -121,7 +140,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                       options={[]}
                       multiple
                       value={parameter.value as string[] | number[] | boolean[]}
-                      onChange={handleParameterChange}
+                      onChange={handleAutocompleteChange}
                       renderInput={(params) => {
                         return (
                           <TextField
@@ -152,7 +171,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                         control={
                           <Checkbox
                             name={parameter.name}
-                            onChange={handleParameterChange}
+                            onChange={handleCheckboxChange}
                             checked={parameter.value === true}
                           />
                         }
