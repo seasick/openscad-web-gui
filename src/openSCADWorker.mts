@@ -31,10 +31,15 @@ async function exportFile(
   params: OpenSCADWorkerInputMessage['params'],
   fileType = 'stl'
 ): Promise<OpenSCADWorkerOutputMessage> {
-  const parameters = params.map(({ name, value }) => {
-    if (typeof value === 'string') {
+  const parameters = params.map(({ name, type, value }) => {
+    if (type === 'string' && typeof value === 'string') {
       value = escapeShell(value);
+    } else if (type === 'number[]' && Array.isArray(value)) {
+      value = `[${value.join(',')}]`;
+    } else if (type === 'string[]' && Array.isArray(value)) {
+      value = `[${value.map((item) => escapeShell(item)).join(',')}]`;
     }
+
     return `-D${name}=${value}`;
   });
 
@@ -53,9 +58,13 @@ async function preview(
   params: OpenSCADWorkerInputMessage['params'],
   fileType = 'stl'
 ): Promise<OpenSCADWorkerOutputMessage> {
-  const parameters = params.map(({ name, value }) => {
-    if (typeof value === 'string') {
+  const parameters = params.map(({ name, type, value }) => {
+    if (type === 'string' && typeof value === 'string') {
       value = escapeShell(value);
+    } else if (type === 'number[]' && Array.isArray(value)) {
+      value = `[${value.join(',')}]`;
+    } else if (type === 'string[]' && Array.isArray(value)) {
+      value = `[${value.map((item) => escapeShell(item)).join(',')}]`;
     }
     return `-D${name}=${value}`;
   });

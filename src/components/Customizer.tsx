@@ -2,6 +2,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
@@ -19,19 +20,21 @@ type Props = {
 };
 
 export default function Customizer({ parameters, onChange }: Props) {
-  const handleParameterChange =
-    (isCheckbox) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newParameters = parameters.map((parameter) => {
-        if (parameter.name === event.target.name) {
-          return {
-            ...parameter,
-            value: isCheckbox ? event.target.checked : event.target.value,
-          };
-        }
-        return parameter;
-      });
-      onChange(newParameters);
-    };
+  const handleParameterChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    newValue?
+  ) => {
+    const newParameters = parameters.map((parameter) => {
+      if (parameter.name === event.target.name) {
+        return {
+          ...parameter,
+          value: newValue || event.target.value,
+        };
+      }
+      return parameter;
+    });
+    onChange(newParameters);
+  };
 
   // Group parameters
   const groups = useMemo(
@@ -74,7 +77,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                         fullWidth
                         key={parameter.name}
                         name={parameter.name}
-                        onChange={handleParameterChange(false)}
+                        onChange={handleParameterChange}
                         value={parameter.value}
                         sx={{ mt: 2, p: 1 }}
                       >
@@ -94,7 +97,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                       type={parameter.type}
                       key={parameter.name}
                       name={parameter.name}
-                      onChange={handleParameterChange(false)}
+                      onChange={handleParameterChange}
                       value={parameter.value}
                       InputProps={{
                         inputProps: {
@@ -107,6 +110,41 @@ export default function Customizer({ parameters, onChange }: Props) {
                       sx={{ mt: 2, p: 1 }}
                     />
                   );
+                } else if (
+                  parameter.type === 'number[]' ||
+                  parameter.type === 'string[]'
+                ) {
+                  return (
+                    <Autocomplete
+                      key={parameter.name}
+                      freeSolo
+                      options={[]}
+                      multiple
+                      value={parameter.value as string[] | number[] | boolean[]}
+                      onChange={handleParameterChange}
+                      renderInput={(params) => {
+                        return (
+                          <TextField
+                            label={parameter.description || parameter.name}
+                            fullWidth
+                            key={parameter.name}
+                            name={parameter.name}
+                            InputProps={{
+                              inputProps: {
+                                maxLength: parameter.range?.max,
+                                min: parameter.range?.min,
+                                max: parameter.range?.max,
+                                step: parameter.range?.step,
+                              },
+                            }}
+                            sx={{ mt: 2, p: 1 }}
+                            {...params}
+                            type={parameter.type}
+                          />
+                        );
+                      }}
+                    />
+                  );
                 } else if (parameter.type === 'boolean') {
                   return (
                     <FormGroup key={parameter.name}>
@@ -114,7 +152,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                         control={
                           <Checkbox
                             name={parameter.name}
-                            onChange={handleParameterChange(true)}
+                            onChange={handleParameterChange}
                             checked={parameter.value === true}
                           />
                         }

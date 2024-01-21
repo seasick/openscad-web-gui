@@ -9,10 +9,18 @@ type ParameterRange = {
   step?: number;
 };
 
+type ParameterType =
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'string[]'
+  | 'number[]'
+  | 'boolean[]';
+
 export type Parameter = {
   name: string;
-  type: 'string' | 'number' | 'boolean';
-  value: string | boolean | number;
+  type: ParameterType;
+  value: string | boolean | number | string[] | number[] | boolean[];
   description?: string;
   group?: string;
   range?: ParameterRange;
@@ -28,7 +36,7 @@ export default function parseParameters(script: string): Parameter[] {
 
   const parameters: Record<string, Parameter> = {};
   const parameterRegex =
-    /^([a-z0-9A-Z_$]+)\s*=\s*([^;]+);[\t\f\cK ]*(\/\/.*)?/gm; // TODO: Use AST parser instead of regex
+    /^([a-z0-9A-Z_$]+)\s*=\s*([^;]+);[\t\f\cK ]*(\/\/[^\n]*)?/gm; // TODO: Use AST parser instead of regex
   const groupRegex = /^\/\*\s*\[([^\]]+)\]\s*\*\//gm;
 
   const groupSections: { id: string; group: string; code: string }[] = [];
@@ -139,12 +147,31 @@ export default function parseParameters(script: string): Parameter[] {
 
 function convertType(rawValue): {
   value: string | boolean | number;
-  type: 'string' | 'number' | 'boolean';
+  type: ParameterType;
 } {
   if (/^\d+(\.\d+)?$/.test(rawValue)) {
     return { value: parseFloat(rawValue), type: 'number' };
   } else if (rawValue === 'true' || rawValue === 'false') {
     return { value: rawValue === 'true', type: 'boolean' };
+  } else if (rawValue.startsWith('[') && rawValue.endsWith(']')) {
+    // Array type
+    const arrayValue = rawValue
+      .slice(1, -1)
+      .split(',')
+      .map((item) => item.trim());
+    if (arrayValue.every((item) => /^\d+(\.\d+)?$/.test(item))) {
+      return {
+        value: arrayValue.map((item) => parseFloat(item)),
+        type: 'number[]',
+      };
+    } else if (arrayValue.every((item) => /^".*"$/.test(item))) {
+      return {
+        value: arrayValue.map((item) => item.slice(1, -1)),
+        type: 'string[]',
+      };
+    } else {
+      return { value: arrayValue, type: 'string[]' };
+    }
   } else {
     // Remove quotes
     rawValue = rawValue.replace(/^"(.*)"$/, '$1');

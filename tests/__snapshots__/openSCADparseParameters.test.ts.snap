@@ -254,8 +254,15 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
     "name": "Vector6",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34,44,43,23,23]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      44,
+      43,
+      23,
+      23,
+    ],
   },
   {
     "description": "Text box for string",
@@ -276,8 +283,10 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
       "min": 0,
       "step": 2,
     },
-    "type": "string",
-    "value": "[12]",
+    "type": "number[]",
+    "value": [
+      12,
+    ],
   },
   {
     "description": undefined,
@@ -289,8 +298,11 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
       "min": 0,
       "step": 2,
     },
-    "type": "string",
-    "value": "[12,34]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+    ],
   },
   {
     "description": undefined,
@@ -302,8 +314,12 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
       "min": 0,
       "step": 2,
     },
-    "type": "string",
-    "value": "[12,34,46]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      46,
+    ],
   },
   {
     "description": undefined,
@@ -315,8 +331,13 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
       "min": 0,
       "step": 2,
     },
-    "type": "string",
-    "value": "[12,34,46,24]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      46,
+      24,
+    ],
   },
 ]
 `;
@@ -332,8 +353,14 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
       "max": 2,
       "min": 0,
     },
-    "type": "string",
-    "value": "[35, 35, 35, 35, 35]",
+    "type": "number[]",
+    "value": [
+      35,
+      35,
+      35,
+      35,
+      35,
+    ],
   },
   {
     "description": "How wide should each segment be?",
@@ -341,8 +368,15 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "segment_diameters",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[140, 100, 120, 90, 110, 90]",
+    "type": "number[]",
+    "value": [
+      140,
+      100,
+      120,
+      90,
+      110,
+      90,
+    ],
   },
   {
     "description": "The shape of the twig",
@@ -372,8 +406,14 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "twig_twist",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[25, 25, 25, 0, 25]",
+    "type": "number[]",
+    "value": [
+      25,
+      25,
+      25,
+      0,
+      25,
+    ],
   },
   {
     "description": "How much should the twigs in the counter direction be twisted?",
@@ -381,8 +421,14 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "twig_counter_twist",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[25, 25, 25, 0, 25]",
+    "type": "number[]",
+    "value": [
+      25,
+      25,
+      25,
+      0,
+      25,
+    ],
   },
   {
     "description": "How thick should a twig be?",
@@ -493,8 +539,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_segment_count",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[2, 5]",
+    "type": "number[]",
+    "value": [
+      2,
+      5,
+    ],
   },
   {
     "description": "The height of each segment is between those two numbers.",
@@ -502,8 +551,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_heights",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[0, 180]",
+    "type": "number[]",
+    "value": [
+      0,
+      180,
+    ],
   },
   {
     "description": "Min/max of all the diameters.",
@@ -511,8 +563,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_diameters",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[100, 180]",
+    "type": "number[]",
+    "value": [
+      100,
+      180,
+    ],
   },
   {
     "description": "The amount of twig twist will be between those two numbers.",
@@ -520,8 +575,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_twig_twist",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[0, 180]",
+    "type": "number[]",
+    "value": [
+      0,
+      180,
+    ],
   },
   {
     "description": "Min/max of the twig diameter.",
@@ -529,8 +587,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_twig_diameter",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[2, 20]",
+    "type": "number[]",
+    "value": [
+      2,
+      20,
+    ],
   },
   {
     "description": "The twig count of both twig directions will be between those two numbers.",
@@ -538,8 +599,11 @@ exports[`testing parameter parsing of openscad scripts testing printables-513382
     "name": "min_max_twig_count",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[5, 15]",
+    "type": "number[]",
+    "value": [
+      5,
+      15,
+    ],
   },
   {
     "description": undefined,
@@ -814,8 +878,11 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
     "name": "Vector2",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+    ],
   },
   {
     "description": undefined,
@@ -823,8 +890,12 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
     "name": "Vector3",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34,45]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      45,
+    ],
   },
   {
     "description": undefined,
@@ -832,8 +903,13 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
     "name": "Vector4",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34,45,23]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      45,
+      23,
+    ],
   },
   {
     "description": undefined,
@@ -845,8 +921,12 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
       "min": 1,
       "step": 2,
     },
-    "type": "string",
-    "value": "[12,34,46]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      46,
+    ],
   },
   {
     "description": undefined,
@@ -857,8 +937,13 @@ exports[`testing parameter parsing of openscad scripts testing specialVector.sca
       "max": 50,
       "min": 1,
     },
-    "type": "string",
-    "value": "[12,34,45,23]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      45,
+      23,
+    ],
   },
 ]
 `;
@@ -887,8 +972,15 @@ exports[`testing parameter parsing of openscad scripts testing splitAfterFunctio
     "name": "Vector6",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34,44,43,23,23]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      44,
+      43,
+      23,
+      23,
+    ],
   },
   {
     "description": "Text box for string with length 8",
@@ -912,8 +1004,15 @@ exports[`testing parameter parsing of openscad scripts testing testbox.scad: tes
     "name": "Vector6",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "[12,34,44,43,23,23]",
+    "type": "number[]",
+    "value": [
+      12,
+      34,
+      44,
+      43,
+      23,
+      23,
+    ],
   },
   {
     "description": "Text box for string with length 8",
