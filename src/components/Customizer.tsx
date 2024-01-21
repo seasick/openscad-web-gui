@@ -38,8 +38,7 @@ export default function Customizer({ parameters, onChange }: Props) {
   };
 
   const handleParameterChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    newValue?
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     changeParameter(event.target.name, event.target.value);
   };

@@ -1,12 +1,5 @@
 import { FetchaFile } from '../fetcha';
 
-type Stl = {
-  id: number;
-  name: string;
-  fileSize: number;
-  // filePreviewPath: string; // Always empty in my tests
-};
-
 export default async function thingiverseComFetcha(
   url: string,
   fileNameFilter?: string
