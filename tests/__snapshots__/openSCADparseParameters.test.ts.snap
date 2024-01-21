@@ -114,6 +114,15 @@ exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad:
 exports[`testing parameter parsing of openscad scripts testing example1.scad: example1.scad 1`] = `
 [
   {
+    "description": "A variable which comes first before the tabs",
+    "group": undefined,
+    "name": "VariableBeforeFirstTab",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 1,
+  },
+  {
     "description": "combo box for number",
     "group": "Drop down box:",
     "name": "Numbers",

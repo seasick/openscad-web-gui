@@ -79,7 +79,7 @@ export default function Customizer({ parameters, onChange }: Props) {
         .map(([groupName, groupParams], idx) => (
           <Accordion defaultExpanded={idx === 0} key={idx}>
             <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-              {groupName}
+              {groupName || <i>Common Parameters</i>}
             </AccordionSummary>
             <AccordionDetails>
               {groupParams.map((parameter) => {

@@ -1,5 +1,8 @@
 // Copied from https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Customizer
 
+// A variable which comes first before the tabs
+VariableBeforeFirstTab = 1;
+
 /* [Drop down box:] */
 // combo box for number
 Numbers=2; // [0, 1, 2, 3]
@@ -44,3 +47,5 @@ Vector1=[12]; //[0:2:50]
 Vector2=[12,34]; //[0:2:50]
 Vector3=[12,34,46]; //[0:2:50]
 Vector4=[12,34,46,24]; //[0:2:50]
+
+cube();

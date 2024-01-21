@@ -39,7 +39,13 @@ export default function parseParameters(script: string): Parameter[] {
     /^([a-z0-9A-Z_$]+)\s*=\s*([^;]+);[\t\f\cK ]*(\/\/[^\n]*)?/gm; // TODO: Use AST parser instead of regex
   const groupRegex = /^\/\*\s*\[([^\]]+)\]\s*\*\//gm;
 
-  const groupSections: { id: string; group: string; code: string }[] = [];
+  const groupSections: { id: string; group: string; code: string }[] = [
+    {
+      id: '',
+      group: undefined,
+      code: script,
+    },
+  ];
   let tmpGroup;
 
   // Find groups
@@ -59,13 +65,13 @@ export default function parseParameters(script: string): Parameter[] {
     group.code = script.substring(startIndex, endIndex);
   });
 
-  // If there are no groups, add the entire script as a group
-  if (!groupSections.length) {
-    groupSections.push({
-      id: '',
-      group: undefined,
-      code: script,
-    });
+  // If we have more then one group, we need to adjust the code of the first group.
+  // It should onyl have the code that is above the first group.
+  if (groupSections.length > 1) {
+    groupSections[0].code = script.substring(
+      0,
+      script.indexOf(groupSections[1].id)
+    );
   }
 
   groupSections.forEach((groupSection) => {
