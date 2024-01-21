@@ -1,4 +1,5 @@
 import printablesComFetcha from './fetcha/printables.com';
+import thingiverseComFetcha from './fetcha/thingiverse.com';
 
 export type FetchaFile = {
   name: string;
@@ -15,6 +16,9 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
     case 'printables.com':
     case 'www.printables.com':
       return await printablesComFetcha(url, '.scad');
+    case 'thingiverse.com':
+    case 'www.thingiverse.com':
+      return await thingiverseComFetcha(url, '.scad');
     default: {
       const urlParts = url.split('/');
 
