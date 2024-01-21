@@ -1,4 +1,4 @@
-# WebOpenSCAD
+# OpenSCAD Web GUI
 
 This project uses [`openscad-wasm`](https://github.com/openscad/openscad-wasm) under the hood to
 build an editor for OpenSCAD that is capable of loading `.scad` files from other servers.
