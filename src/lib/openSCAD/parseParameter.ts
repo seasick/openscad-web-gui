@@ -1,9 +1,23 @@
+type ParameterOption = {
+  value: string | number;
+  label: string;
+};
+
+type ParameterRange = {
+  min?: number;
+  max?: number;
+  step?: number;
+};
+
 export type Parameter = {
   name: string;
   type: 'string' | 'number' | 'boolean';
   value: string | boolean | number;
   description?: string;
   group?: string;
+  range?: ParameterRange;
+  options?: ParameterOption[];
+  maxLength?: number;
 };
 
 export default function parseParameters(script: string): Parameter[] {
@@ -13,7 +27,8 @@ export default function parseParameters(script: string): Parameter[] {
   script = script.split(/^(module |function )/m)[0];
 
   const parameters: Record<string, Parameter> = {};
-  const parameterRegex = /^([a-z0-9A-Z_$]+)\s*=\s*([^;]+)/gm; // TODO: Use AST parser instead of regex
+  const parameterRegex =
+    /^([a-z0-9A-Z_$]+)\s*=\s*([^;]+);[\t\f\cK ]*(\/\/.*)?/gm; // TODO: Use AST parser instead of regex
   const groupRegex = /^\/\*\s*\[([^\]]+)\]\s*\*\//gm;
 
   const groupSections: { id: string; group: string; code: string }[] = [];
@@ -50,7 +65,48 @@ export default function parseParameters(script: string): Parameter[] {
     while ((match = parameterRegex.exec(groupSection.code)) !== null) {
       const name = match[1];
       const value = match[2];
-      let description;
+      const typeAndValue = convertType(value);
+
+      let description: string;
+      let options: ParameterOption[];
+      let range: ParameterRange;
+
+      if (match[3]) {
+        const rawComment = match[3].replace(/^\/\/\s*/, '').trim();
+        const cleaned = rawComment.replace(/^\[+|\]+$/g, '');
+
+        if (!isNaN(rawComment)) {
+          // If the cleaned comment is a number, then we assume that it is a step
+          // value (or maximum length in case of a string)
+          if (typeAndValue.type === 'string') {
+            range = { max: parseFloat(cleaned) };
+          } else {
+            range = { step: parseFloat(cleaned) };
+          }
+        } else if (rawComment.startsWith('[') && cleaned.includes(',')) {
+          // If the options contain commas, we assume that those are options for a select element.
+          options = cleaned
+            .trim()
+            .split(',')
+            .map((option) => {
+              const [value, label] = option.trim().split(':');
+              return { value, label };
+            });
+        } else if (cleaned.match(/([0-9]+:?)+/)) {
+          // If the cleaned comment contains a colon, we assume that it is a range
+          const [min, maxOrStep, max] = cleaned.trim().split(':');
+
+          if (min && (maxOrStep || max)) {
+            range = { min: parseFloat(min) };
+          }
+          if (max || maxOrStep || min) {
+            range = { ...range, max: parseFloat(max || maxOrStep || min) };
+          }
+          if (max && maxOrStep) {
+            range = { ...range, step: parseFloat(maxOrStep) };
+          }
+        }
+      }
 
       // Now search for the comment right above the parameter definition. This is done
       // by splitting the script at the parameter definition and using the last line
@@ -71,7 +127,9 @@ export default function parseParameters(script: string): Parameter[] {
         description,
         group: groupSection.group,
         name,
-        ...convertType(value),
+        range,
+        options,
+        ...typeAndValue,
       };
     }
   });

@@ -1,8 +1,11 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import React, { useMemo } from 'react';
 
@@ -63,6 +66,27 @@ export default function Customizer({ parameters, onChange }: Props) {
                   parameter.type === 'number' ||
                   parameter.type === 'string'
                 ) {
+                  if (parameter.options) {
+                    return (
+                      <TextField
+                        select
+                        label={parameter.description || parameter.name}
+                        fullWidth
+                        key={parameter.name}
+                        name={parameter.name}
+                        onChange={handleParameterChange(false)}
+                        value={parameter.value}
+                        sx={{ mt: 2, p: 1 }}
+                      >
+                        {parameter.options.map((option, idx) => (
+                          <MenuItem key={idx} value={option.value}>
+                            {option.label || option.value}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    );
+                  }
+
                   return (
                     <TextField
                       label={parameter.description || parameter.name}
@@ -72,6 +96,14 @@ export default function Customizer({ parameters, onChange }: Props) {
                       name={parameter.name}
                       onChange={handleParameterChange(false)}
                       value={parameter.value}
+                      InputProps={{
+                        inputProps: {
+                          maxLength: parameter.range?.max,
+                          min: parameter.range?.min,
+                          max: parameter.range?.max,
+                          step: parameter.range?.step,
+                        },
+                      }}
                       sx={{ mt: 2, p: 1 }}
                     />
                   );
