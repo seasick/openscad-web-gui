@@ -16,20 +16,19 @@ type Props = {
 };
 
 export default function Customizer({ parameters, onChange }: Props) {
-  const handleParameterChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newParameters = parameters.map((parameter) => {
-      if (parameter.name === event.target.name) {
-        return {
-          ...parameter,
-          value: event.target.value,
-        };
-      }
-      return parameter;
-    });
-    onChange(newParameters);
-  };
+  const handleParameterChange =
+    (isCheckbox) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newParameters = parameters.map((parameter) => {
+        if (parameter.name === event.target.name) {
+          return {
+            ...parameter,
+            value: isCheckbox ? event.target.checked : event.target.value,
+          };
+        }
+        return parameter;
+      });
+      onChange(newParameters);
+    };
 
   // Group parameters
   const groups = useMemo(
@@ -66,7 +65,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                     type={parameter.type}
                     key={parameter.name}
                     name={parameter.name}
-                    onChange={handleParameterChange}
+                    onChange={handleParameterChange(false)}
                     value={parameter.value}
                     sx={{ mt: 2, p: 1 }}
                   />
@@ -78,7 +77,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                       control={
                         <Checkbox
                           name={parameter.name}
-                          onChange={handleParameterChange}
+                          onChange={handleParameterChange(true)}
                           checked={parameter.value === true}
                         />
                       }
