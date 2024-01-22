@@ -13,4 +13,8 @@ export default defineConfig({
       configureVisualRegression(on);
     },
   },
+  reporter: 'junit',
+  reporterOptions: {
+    mochaFile: 'cypress/report-[hash].xml',
+  },
 });

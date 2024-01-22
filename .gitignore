@@ -23,3 +23,4 @@ Thumbs.db
 /cypress/videos
 /cypress/screenshots
 /cypress/snapshots/diff
+/cypress/report-*.xml
