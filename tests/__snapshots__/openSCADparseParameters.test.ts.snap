@@ -351,6 +351,77 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
 ]
 `;
 
+exports[`testing parameter parsing of openscad scripts testing example2.scad: example2.scad 1`] = `
+[
+  {
+    "description": "Variable which will be treated as \`number\`",
+    "group": undefined,
+    "name": "x",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 1,
+  },
+  {
+    "description": "Variable which will be treated as \`string\`",
+    "group": undefined,
+    "name": "y",
+    "options": undefined,
+    "range": undefined,
+    "type": "string",
+    "value": "a",
+  },
+  {
+    "description": "Variable which will be treated as \`boolean\`",
+    "group": undefined,
+    "name": "z",
+    "options": undefined,
+    "range": undefined,
+    "type": "boolean",
+    "value": true,
+  },
+  {
+    "description": "Variable which will be treated as \`number[]\`",
+    "group": undefined,
+    "name": "xxx",
+    "options": undefined,
+    "range": undefined,
+    "type": "number[]",
+    "value": [
+      1,
+      2,
+      3,
+    ],
+  },
+  {
+    "description": "Variable which will be treated as \`string[]\`",
+    "group": undefined,
+    "name": "yyy",
+    "options": undefined,
+    "range": undefined,
+    "type": "string[]",
+    "value": [
+      "a",
+      "b",
+      "c",
+    ],
+  },
+  {
+    "description": "Variable which will be treated as \`boolean[]\`",
+    "group": undefined,
+    "name": "zzz",
+    "options": undefined,
+    "range": undefined,
+    "type": "boolean[]",
+    "value": [
+      true,
+      false,
+      true,
+    ],
+  },
+]
+`;
+
 exports[`testing parameter parsing of openscad scripts testing printables-513382.scad: printables-513382.scad 1`] = `
 [
   {

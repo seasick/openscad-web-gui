@@ -58,16 +58,20 @@ async function preview(
   params: OpenSCADWorkerInputMessage['params'],
   fileType = 'stl'
 ): Promise<OpenSCADWorkerOutputMessage> {
-  const parameters = params.map(({ name, type, value }) => {
-    if (type === 'string' && typeof value === 'string') {
-      value = escapeShell(value);
-    } else if (type === 'number[]' && Array.isArray(value)) {
-      value = `[${value.join(',')}]`;
-    } else if (type === 'string[]' && Array.isArray(value)) {
-      value = `[${value.map((item) => escapeShell(item)).join(',')}]`;
-    }
-    return `-D${name}=${value}`;
-  });
+  const parameters = params
+    .map(({ name, type, value }) => {
+      if (type === 'string' && typeof value === 'string') {
+        value = escapeShell(value);
+      } else if (type === 'number[]' && Array.isArray(value)) {
+        value = `[${value.join(',')}]`;
+      } else if (type === 'string[]' && Array.isArray(value)) {
+        value = `[${value.map((item) => escapeShell(item)).join(',')}]`;
+      } else if (type === 'boolean[]' && Array.isArray(value)) {
+        value = `[${value.join(',')}]`;
+      }
+      return `-D${name}=${value}`;
+    })
+    .filter((x) => !!x);
 
   parameters.push('--export-format=binstl');
   parameters.push(`--enable=manifold`);

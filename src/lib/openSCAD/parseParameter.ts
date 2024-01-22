@@ -167,15 +167,18 @@ function convertType(rawValue): {
   type: ParameterType;
 } {
   if (/^\d+(\.\d+)?$/.test(rawValue)) {
+    // Raw value matches something like `123.123` or `123`.
     return { value: parseFloat(rawValue), type: 'number' };
   } else if (rawValue === 'true' || rawValue === 'false') {
+    // Raw value matches `true` or `false`.
     return { value: rawValue === 'true', type: 'boolean' };
   } else if (rawValue.startsWith('[') && rawValue.endsWith(']')) {
-    // Array type
+    // Raw values is an array
     const arrayValue = rawValue
       .slice(1, -1)
       .split(',')
       .map((item) => item.trim());
+
     if (arrayValue.every((item) => /^\d+(\.\d+)?$/.test(item))) {
       return {
         value: arrayValue.map((item) => parseFloat(item)),
@@ -185,6 +188,13 @@ function convertType(rawValue): {
       return {
         value: arrayValue.map((item) => item.slice(1, -1)),
         type: 'string[]',
+      };
+    } else if (
+      arrayValue.every((item) => item === 'true' || item === 'false')
+    ) {
+      return {
+        value: arrayValue.map((item) => item === 'true'),
+        type: 'boolean[]',
       };
     } else {
       return { value: arrayValue, type: 'string[]' };
