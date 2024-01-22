@@ -52,7 +52,6 @@ jobs:
         with:
           browser: chrome
           headless: true
-          record: true
           start: npm run test:e2e:ci
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 120
