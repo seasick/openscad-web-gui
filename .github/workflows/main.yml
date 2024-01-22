@@ -87,7 +87,9 @@ jobs:
         if: failure()
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: |
+            cypress/screenshots
+            cypress/snapshots/diff
 
   # Single deploy job since we're just deploying
   deploy:
