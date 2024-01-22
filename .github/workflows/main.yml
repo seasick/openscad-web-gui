@@ -68,11 +68,16 @@ jobs:
           node-version: 21.x
           cache: 'npm'
 
+      - name: Build application
+        run: |
+          npm ci
+          npm run build
+
       - name: Run e2e tests
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          start: npm run build && npm run test:e2e:ci
+          start: npm run test:e2e:ci
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 120
 
