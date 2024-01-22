@@ -25,6 +25,7 @@
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "cypress": "^13.6.3",
+    "cypress-multi-reporters": "^1.6.4",
     "cypress-visual-regression": "^4.0.0",
     "esbuild": "0.19.11",
     "esbuild-plugin-copy": "^2.1.1",
