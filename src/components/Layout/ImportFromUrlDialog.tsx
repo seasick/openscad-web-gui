@@ -1,3 +1,4 @@
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -29,6 +30,25 @@ export default function ImportFromUrlDialog({ onClose }: Props) {
     <Dialog open onClose={handleClose} fullWidth maxWidth="md">
       <DialogTitle>Import from URL</DialogTitle>
       <DialogContent>
+        <Alert severity="info">
+          You can paste any url to an OpenSCAD file here. The following
+          platforms are <b>also</b> supported:
+          <ul>
+            <li>
+              Printables (url should look like{' '}
+              <pre style={{ display: 'contents' }}>
+                https://www.printables.com/model/12345-some-text
+              </pre>
+              )
+            </li>
+            <li>
+              Thingiverse (url should look like{' '}
+              <pre style={{ display: 'contents' }}>
+                https://www.thingiverse.com/thing:12345
+              </pre>
+            </li>
+          </ul>
+        </Alert>
         <TextField
           autoFocus
           margin="dense"
