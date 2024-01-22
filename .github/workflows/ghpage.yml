@@ -51,10 +51,16 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          headless: true
           start: npm run test:e2e:ci
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 120
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
 
   # Single deploy job since we're just deploying
   deploy:
