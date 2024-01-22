@@ -70,6 +70,7 @@ jobs:
 
       - name: Build application
         run: |
+          bash ./scripts/get-openscad.sh
           npm ci
           npm run build
 
