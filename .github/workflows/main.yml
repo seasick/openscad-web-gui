@@ -80,7 +80,7 @@ jobs:
           browser: chrome
           start: npm run test:e2e:ci
           wait-on: 'http://localhost:8000'
-          wait-on-timeout: 120
+          wait-on-timeout: 30
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v3
