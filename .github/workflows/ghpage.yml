@@ -22,6 +22,46 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 21.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21.x
+          cache: 'npm'
+
+      - name: build
+        run: |
+          bash ./scripts/get-openscad.sh
+          npm ci
+          npm run lint
+          npm run test
+          npm run build
+        env:
+          TRACKER_SNIPPET: ''
+          GH_ISSUE_URL: ${{ vars.GH_ISSUE_URL }}
+          GH_REPO_URL: ${{ vars.GH_REPO_URL }}
+          WEBSITE_URL: ${{ vars.WEBSITE_URL }}
+
+      - name: Run cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          headless: true
+          record: true
+          start: test:e2e:ci
+          wait-on: 'http://localhost:8000'
+          wait-on-timeout: 120
+          env:
+            TRACKER_SNIPPET: ''
+            GH_ISSUE_URL: ${{ vars.GH_ISSUE_URL }}
+            GH_REPO_URL: ${{ vars.GH_REPO_URL }}
+            WEBSITE_URL: ${{ vars.WEBSITE_URL }}
+
   # Single deploy job since we're just deploying
   deploy:
     environment:
@@ -42,8 +82,6 @@ jobs:
         run: |
           bash ./scripts/get-openscad.sh
           npm ci
-          npm run lint
-          npm run test
           NODE_ENV=production npm run build
         env:
           TRACKER_SNIPPET: ${{ vars.TRACKER_SNIPPET }}

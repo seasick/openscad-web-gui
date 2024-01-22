@@ -10,6 +10,8 @@
     "prettier": "prettier . --write",
     "serve": "node esbuild.mjs --serve --watch",
     "test": "jest",
+    "test:e2e": "cypress run",
+    "test:e2e:ci": "node esbuild.mjs --serve && cypress run",
     "watch": "node esbuild.mjs --watch"
   },
   "keywords": [
