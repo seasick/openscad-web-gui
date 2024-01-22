@@ -6,9 +6,10 @@
   "browser": "src/app.tsx",
   "scripts": {
     "build": "node esbuild.mjs",
+    "dev": "node esbuild.mjs --serve --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "prettier": "prettier . --write",
-    "serve": "node esbuild.mjs --serve --watch",
+    "serve": "node esbuild.mjs --serve",
     "test": "jest",
     "test:e2e": "cypress run",
     "watch": "node esbuild.mjs --watch"

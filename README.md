@@ -11,7 +11,7 @@ visual customizer.
 ```bash
 git clone https://github.com/seasick/openscad-web-gui
 npm i
-npm run serve # Run a webserver and rebuild on file changes
+npm run dev # Run a webserver and rebuild on file changes
 # npm run lint
 # npm run test
 ```
