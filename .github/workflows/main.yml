@@ -78,7 +78,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          start: npm run test:e2e:ci
+          start: npm run serve
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 30
 
