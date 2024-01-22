@@ -22,6 +22,8 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "cypress": "^13.6.3",
+    "cypress-visual-regression": "^4.0.0",
     "esbuild": "0.19.11",
     "esbuild-plugin-copy": "^2.1.1",
     "eslint": "^8.56.0",
