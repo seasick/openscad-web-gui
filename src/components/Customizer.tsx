@@ -168,7 +168,7 @@ export default function Customizer({ parameters, onChange }: Props) {
                   parameter.type === 'string[]' ||
                   parameter.type === 'boolean[]'
                 ) {
-                  let type = parameter.type.replace('[]', '');
+                  const type = parameter.type.replace('[]', '');
                   let validate;
 
                   if (type === 'number') {
@@ -183,15 +183,15 @@ export default function Customizer({ parameters, onChange }: Props) {
                       fullWidth
                       label={parameter.description || parameter.name}
                       onChange={handleAutocompleteChange(parameter.name)}
-                      renderChip={(Component, key, props) => {
+                      renderChip={(Component, key, chipProps) => {
                         // Rendering the label with a boolean would lead to errors,
                         // hence the toString() call.
                         return (
                           <Component
                             key={key}
-                            {...props}
-                            title={props.title.toString()}
-                            label={props.label.toString()}
+                            {...chipProps}
+                            title={chipProps.title.toString()}
+                            label={chipProps.label.toString()}
                           />
                         );
                       }}
@@ -200,11 +200,9 @@ export default function Customizer({ parameters, onChange }: Props) {
                         p: 1,
                       }}
                       validate={validate}
-                      value={
-                        (
-                          parameter.value as string[] | number[] | boolean[]
-                        ).map((x) => x.toString()) as any
-                      }
+                      value={(
+                        parameter.value as string[] | number[] | boolean[]
+                      ).map((x) => x.toString())}
                     />
                   );
                 }
