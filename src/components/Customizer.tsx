@@ -2,12 +2,12 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
+import { MuiChipsInput } from 'mui-chips-input';
 import React, { useMemo } from 'react';
 
 import { Parameter } from '../lib/openSCAD/parseParameter';
@@ -19,12 +19,35 @@ type Props = {
   onChange: (parameters: Parameters) => void;
 };
 
+const validateNumber = (value) => {
+  if (isNaN(Number(value))) {
+    return { isError: true, textError: 'Input must be a number' };
+  }
+  return true;
+};
+
+const validateBoolean = (value) => {
+  if (value !== 'true' && value !== 'false') {
+    return {
+      isError: true,
+      textError: `Input must be a boolean (i.e. 'true' or 'false')`,
+    };
+  }
+  return true;
+};
+
 export default function Customizer({ parameters, onChange }: Props) {
   const changeParameter = (name: string, newValue?) => {
     const newParameters = parameters.map((parameter) => {
       if (parameter.name === name) {
         if (parameter.type === 'number') {
           newValue = Number(newValue);
+        } else if (parameter.type === 'boolean') {
+          newValue = Boolean(newValue);
+        } else if (parameter.type === 'number[]') {
+          newValue = newValue.map(Number);
+        } else if (parameter.type === 'boolean[]') {
+          newValue = newValue.map((v) => v === 'true');
         }
 
         return {
@@ -47,11 +70,8 @@ export default function Customizer({ parameters, onChange }: Props) {
     changeParameter(event.target.name, event.target.checked);
   };
 
-  const handleAutocompleteChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    newValue?
-  ) => {
-    changeParameter(event.target.name, newValue);
+  const handleAutocompleteChange = (name) => (newValue?) => {
+    changeParameter(name, newValue);
   };
 
   // Group parameters
@@ -128,41 +148,6 @@ export default function Customizer({ parameters, onChange }: Props) {
                       sx={{ mt: 2, p: 1 }}
                     />
                   );
-                } else if (
-                  parameter.type === 'number[]' ||
-                  parameter.type === 'string[]'
-                ) {
-                  return (
-                    <Autocomplete
-                      key={parameter.name}
-                      freeSolo
-                      options={[]}
-                      multiple
-                      value={parameter.value as string[] | number[] | boolean[]}
-                      onChange={handleAutocompleteChange}
-                      renderInput={(params) => {
-                        return (
-                          <TextField
-                            label={parameter.description || parameter.name}
-                            fullWidth
-                            key={parameter.name}
-                            name={parameter.name}
-                            InputProps={{
-                              inputProps: {
-                                maxLength: parameter.range?.max,
-                                min: parameter.range?.min,
-                                max: parameter.range?.max,
-                                step: parameter.range?.step,
-                              },
-                            }}
-                            sx={{ mt: 2, p: 1 }}
-                            {...params}
-                            type={parameter.type}
-                          />
-                        );
-                      }}
-                    />
-                  );
                 } else if (parameter.type === 'boolean') {
                   return (
                     <FormGroup key={parameter.name}>
@@ -178,7 +163,52 @@ export default function Customizer({ parameters, onChange }: Props) {
                       />
                     </FormGroup>
                   );
+                } else if (
+                  parameter.type === 'number[]' ||
+                  parameter.type === 'string[]' ||
+                  parameter.type === 'boolean[]'
+                ) {
+                  let type = parameter.type.replace('[]', '');
+                  let validate;
+
+                  if (type === 'number') {
+                    validate = validateNumber;
+                  } else if (type === 'boolean') {
+                    validate = validateBoolean;
+                  }
+
+                  return (
+                    <MuiChipsInput
+                      key={parameter.name}
+                      fullWidth
+                      label={parameter.description || parameter.name}
+                      onChange={handleAutocompleteChange(parameter.name)}
+                      renderChip={(Component, key, props) => {
+                        // Rendering the label with a boolean would lead to errors,
+                        // hence the toString() call.
+                        return (
+                          <Component
+                            key={key}
+                            {...props}
+                            title={props.title.toString()}
+                            label={props.label.toString()}
+                          />
+                        );
+                      }}
+                      sx={{
+                        mt: 2,
+                        p: 1,
+                      }}
+                      validate={validate}
+                      value={
+                        (
+                          parameter.value as string[] | number[] | boolean[]
+                        ).map((x) => x.toString()) as any
+                      }
+                    />
+                  );
                 }
+
                 return (
                   <div key={parameter.name}>
                     {parameter.name} {parameter.type}
