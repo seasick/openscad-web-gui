@@ -137,11 +137,7 @@ export default function Editor({ url, initialMode }: Props) {
             />
           )}
           {mode === 'editor' && (
-            <CodeEditor
-              onChange={(s) => setCode(s)}
-              code={code}
-              disabled={isRendering || isExporting}
-            />
+            <CodeEditor onChange={(s) => setCode(s)} code={code} />
           )}
         </Stack>
       </Grid>
