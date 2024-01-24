@@ -11,8 +11,12 @@ export default defineConfig({
       },
     },
     baseUrl: 'http://localhost:8000',
-    setupNodeEvents(on) {
+    setupNodeEvents(on, config) {
       configureVisualRegression(on);
+
+      require('cypress-terminal-report/src/installLogsPrinter')(on);
+
+      return config;
     },
   },
   reporterEnabled: 'spec, junit',

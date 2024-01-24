@@ -23,6 +23,7 @@
     "cors-anywhere": "^0.4.4",
     "cypress": "^13.6.3",
     "cypress-multi-reporters": "^1.6.4",
+    "cypress-terminal-report": "^5.3.12",
     "cypress-visual-regression": "^4.0.0",
     "esbuild": "0.19.11",
     "esbuild-plugin-copy": "^2.1.1",

@@ -13,6 +13,7 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 // Import commands.js using ES2015 syntax:
+import installLogsCollector from 'cypress-terminal-report/src/installLogsCollector';
 import { addCompareSnapshotCommand } from 'cypress-visual-regression/dist/command';
 
 import './commands';
@@ -21,6 +22,8 @@ addCompareSnapshotCommand({
   capture: 'viewport',
   errorThreshold: 0.1,
 });
+
+installLogsCollector();
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
