@@ -30,7 +30,7 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
       return [
         {
           name: fileName,
-          url: 'https://corsproxy.io/?' + encodeURIComponent(url),
+          url: '__CORSPROXY' + url,
         },
       ];
     }

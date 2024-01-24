@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { copy } from 'esbuild-plugin-copy';
 
-export default {
+export default (opt_options) => ({
   entryPoints: ['src/openSCADWorker.mts'],
   bundle: true,
   outdir: 'dist',
@@ -22,4 +22,4 @@ export default {
       watch: true,
     }),
   ],
-};
+});

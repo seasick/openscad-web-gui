@@ -109,6 +109,7 @@ jobs:
           GH_ISSUE_URL: ${{ vars.GH_ISSUE_URL }}
           GH_REPO_URL: ${{ vars.GH_REPO_URL }}
           WEBSITE_URL: ${{ vars.WEBSITE_URL }}
+          CORSPROXY: ${{ vars.CORSPROXY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
