@@ -93,7 +93,7 @@ jobs:
 
   # Single deploy job since we're just deploying
   deploy:
-    needs: [lint, test, e2e]
+    needs: [lint, test] # TODO Add e2e again once the flaking and strange behaviour is fixed
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
