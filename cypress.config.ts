@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import installLogsPrinter from 'cypress-terminal-report/src/installLogsPrinter';
 import { configureVisualRegression } from 'cypress-visual-regression';
 
 export default defineConfig({
@@ -13,8 +14,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:8000',
     setupNodeEvents(on, config) {
       configureVisualRegression(on);
-
-      require('cypress-terminal-report/src/installLogsPrinter')(on);
+      installLogsPrinter(on);
 
       return config;
     },
