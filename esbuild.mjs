@@ -5,10 +5,10 @@ import * as esbuild from 'esbuild';
 import appBuildConfig from './esbuild.app.mjs';
 import workerBuildConfig from './esbuild.worker.mjs';
 
-if (process.argv?.length > 2) {
-  const appOptions = {};
-  const workerOptions = {};
+const appOptions = {};
+const workerOptions = {};
 
+if (process.argv?.length > 2) {
   // Check if a cors-proxy should be started
   if (process.argv.includes('--cors-proxy')) {
     const host = process.env.CORS_HOST || '0.0.0.0';
@@ -38,6 +38,6 @@ if (process.argv?.length > 2) {
     });
   }
 } else {
-  await esbuild.build(appBuildConfig);
-  await esbuild.build(workerBuildConfig);
+  await esbuild.build(appBuildConfig(appOptions));
+  await esbuild.build(workerBuildConfig(workerBuildConfig));
 }
