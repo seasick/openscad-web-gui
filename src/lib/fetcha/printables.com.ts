@@ -43,6 +43,13 @@ export default async function printablesComFetcha(
     }
   );
 
+  if (!printProfileResponse.ok) {
+    throw new Error(
+      'Failed to get printables.com model information, response status code was ' +
+        printProfileResponse.status
+    );
+  }
+
   const printProfile = await printProfileResponse.json();
 
   // `stls` cotains an array of files available at a Printables.com model
@@ -86,6 +93,13 @@ async function addDownloadLink(stl: Stl, printId: number): Promise<FetchaFile> {
       mode: 'cors',
     }
   );
+
+  if (!response.ok) {
+    throw new Error(
+      'Failed to get printables.com download link, response status code was ' +
+        response.status
+    );
+  }
 
   const json = await response.json();
 
