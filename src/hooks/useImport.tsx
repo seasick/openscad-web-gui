@@ -4,7 +4,7 @@ import fetcha, { FetchaFile } from '../lib/fetcha';
 
 export default function useImport(url?: string) {
   const [files, setFiles] = useState<FetchaFile[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(!!url);
   const [error, setError] = useState<Error | null>();
 
   useEffect(() => {
