@@ -221,7 +221,7 @@ export default function Editor({ url, initialMode }: Props) {
               const fileType = selectedLabel.split(' ')[1].toLowerCase();
 
               const output = await executeOpenSCAD(
-                'export',
+                WorkerMessageType.EXPORT,
                 code,
                 fileType,
                 parameters

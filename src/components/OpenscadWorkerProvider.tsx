@@ -1,20 +1,20 @@
 import React, { createContext, useState } from 'react';
 
 import executeOpenSCAD from '../lib/openSCAD/execute';
-import { OpenSCADWorkerInputMessage } from '../types';
+import { OpenSCADWorkerMessageData, WorkerMessageType } from '../worker/types';
 
 // Create a context for the web worker
 const OpenSCADWorkerContext = createContext<{
   export?: (
     code: string,
     fileType: string,
-    params?: OpenSCADWorkerInputMessage['params']
+    params?: OpenSCADWorkerMessageData['params']
   ) => void;
   exportFile?: File | null;
   log?: string[];
   preview?: (
     code: string,
-    params?: OpenSCADWorkerInputMessage['params']
+    params?: OpenSCADWorkerMessageData['params']
   ) => void;
   previewFile?: File | null;
   reset?: () => void;
@@ -40,9 +40,15 @@ export default function OpenscadWorkerProvider({ children }: Props) {
     export: async (
       code: string,
       fileType: string,
-      params?: OpenSCADWorkerInputMessage['params']
+      params?: OpenSCADWorkerMessageData['params']
     ) => {
-      const output = await executeOpenSCAD('export', code, fileType, params);
+      const output = await executeOpenSCAD(
+        WorkerMessageType.EXPORT,
+        code,
+        fileType,
+        params
+      );
+
       setLog((prevLog) => [
         ...prevLog,
         ...output.log.stdErr,
@@ -56,9 +62,14 @@ export default function OpenscadWorkerProvider({ children }: Props) {
 
     preview: async (
       code: string,
-      params?: OpenSCADWorkerInputMessage['params']
+      params?: OpenSCADWorkerMessageData['params']
     ) => {
-      const output = await executeOpenSCAD('preview', code, 'stl', params);
+      const output = await executeOpenSCAD(
+        WorkerMessageType.PREVIEW,
+        code,
+        'stl',
+        params
+      );
 
       setLog((prevLog) => [
         ...prevLog,

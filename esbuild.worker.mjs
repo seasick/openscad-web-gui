@@ -2,7 +2,7 @@
 import { copy } from 'esbuild-plugin-copy';
 
 export default (opt_options) => ({
-  entryPoints: ['src/openSCADWorker.mts'],
+  entryPoints: ['src/worker.mts'],
   bundle: true,
   outdir: 'dist',
   minify: process.env.NODE_ENV === 'production',

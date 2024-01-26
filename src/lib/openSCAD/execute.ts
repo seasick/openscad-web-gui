@@ -1,53 +1,82 @@
 import {
-  OpenSCADWorkerInputMessage,
-  OpenSCADWorkerOutputMessage,
-} from '../../types';
+  OpenSCADWorkerMessageData,
+  OpenSCADWorkerResponseData,
+  WorkerMessage,
+  WorkerMessageType,
+  WorkerResponseMessage,
+} from '../../worker/types';
 
-type Output = Omit<OpenSCADWorkerOutputMessage, 'output'> & { output: File };
+type Output = Omit<OpenSCADWorkerResponseData, 'output'> & { output: File };
+type PromiseMapItem = {
+  resolve: (value: Output | PromiseLike<Output>) => void;
+  reject: (reason?: any) => void;
+  type: WorkerMessageType;
+};
 
-export default async function executeOpenSCAD(
-  type: 'preview' | 'export',
-  code: string,
-  fileType: string,
-  params: OpenSCADWorkerInputMessage['params']
-): Promise<Output> {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker('./openSCADWorker.js', { type: 'module' });
+const worker = new Worker('./worker.js', { type: 'module' });
+const promiseMap: Record<string, PromiseMapItem> = {};
 
-    worker.addEventListener(
-      'message',
-      (event: MessageEvent<OpenSCADWorkerOutputMessage>) => {
-        const { output, exitCode, duration, log } = event.data;
+worker.addEventListener(
+  'message',
+  (event: MessageEvent<WorkerResponseMessage>) => {
+    const { id } = event.data;
+    const { resolve, reject } = promiseMap[id];
 
-        console.debug(`Rendered in ${duration}ms with exit code ${exitCode}`);
-        console.debug(log);
+    if (!resolve || !reject) {
+      throw new Error('Unknown message id');
+    }
+
+    if (event.data.err) {
+      reject(event.data.err);
+    } else {
+      if (event.data.type === WorkerMessageType.PREVIEW) {
+        const data = event.data.data as OpenSCADWorkerResponseData;
 
         resolve({
-          output: output ? new File([output], 'result.' + fileType) : null,
-          exitCode,
-          duration,
-          log,
+          ...data,
+          output: new File([data.output], 'export.' + data.fileType),
         });
-
-        worker.terminate();
       }
-    );
+    }
 
-    worker.addEventListener('error', (event) => {
-      reject(event);
-      worker.terminate();
-    });
+    // Remove it from the promise map
+    delete promiseMap[id];
+  }
+);
 
-    worker.addEventListener('unhandledrejection', function (event) {
-      reject(event);
-    });
+worker.addEventListener('error', (event) => {
+  // reject(event);
+  console.log(event); // TODO
+});
 
-    console.log('Sending message to worker', params);
-    worker.postMessage({
-      type,
+worker.addEventListener('unhandledrejection', function (event) {
+  // reject(event);
+  console.log(event); // TODO
+});
+
+export default async function executeOpenSCAD(
+  type: WorkerMessageType,
+  code: string,
+  fileType: string,
+  params: OpenSCADWorkerMessageData['params']
+): Promise<Output> {
+  const id = Math.random().toString(36).substring(2, 9);
+  const promise = new Promise<Output>((resolve, reject) => {
+    promiseMap[id] = { resolve, reject, type };
+  });
+
+  const message: WorkerMessage = {
+    id,
+    type,
+    data: {
       code,
       fileType,
       params,
-    } as OpenSCADWorkerInputMessage);
-  });
+    },
+  };
+
+  console.log('Sending message to worker', params);
+  worker.postMessage(message);
+
+  return promise;
 }
