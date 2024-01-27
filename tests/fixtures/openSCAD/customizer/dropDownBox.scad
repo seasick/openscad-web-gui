@@ -3,6 +3,9 @@
 // combo box for number
 Numbers=2; // [0, 1, 2, 3]
 
+// combo box for number with negative values
+NegativeNumbers=-2; // [-3, -2, -1, 0]
+
 // combo box for string
 Strings="foo"; // [foo, bar, baz]
 

@@ -114,7 +114,11 @@ export default function parseParameters(script: string): Parameter[] {
             .trim()
             .split(',')
             .map((option) => {
-              const [value, label] = option.trim().split(':');
+              let [value, label] = option.trim().split(':');
+              if (typeAndValue.type === 'number') {
+                value = parseFloat(value);
+              }
+
               return { value, label };
             });
         } else if (cleaned.match(/([0-9]+:?)+/)) {
@@ -166,7 +170,7 @@ function convertType(rawValue): {
   value: string | boolean | number;
   type: ParameterType;
 } {
-  if (/^\d+(\.\d+)?$/.test(rawValue)) {
+  if (/^-?\d+(\.\d+)?$/.test(rawValue)) {
     // Raw value matches something like `123.123` or `123`.
     return { value: parseFloat(rawValue), type: 'number' };
   } else if (rawValue === 'true' || rawValue === 'false') {

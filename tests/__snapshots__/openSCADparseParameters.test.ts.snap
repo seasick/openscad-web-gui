@@ -23,24 +23,50 @@ exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad:
     "options": [
       {
         "label": undefined,
-        "value": "0",
+        "value": 0,
       },
       {
         "label": undefined,
-        "value": "1",
+        "value": 1,
       },
       {
         "label": undefined,
-        "value": "2",
+        "value": 2,
       },
       {
         "label": undefined,
-        "value": "3",
+        "value": 3,
       },
     ],
     "range": undefined,
     "type": "number",
     "value": 2,
+  },
+  {
+    "description": "combo box for number with negative values",
+    "group": undefined,
+    "name": "NegativeNumbers",
+    "options": [
+      {
+        "label": undefined,
+        "value": -3,
+      },
+      {
+        "label": undefined,
+        "value": -2,
+      },
+      {
+        "label": undefined,
+        "value": -1,
+      },
+      {
+        "label": undefined,
+        "value": 0,
+      },
+    ],
+    "range": undefined,
+    "type": "number",
+    "value": -2,
   },
   {
     "description": "combo box for string",
@@ -71,15 +97,15 @@ exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad:
     "options": [
       {
         "label": "S",
-        "value": "10",
+        "value": 10,
       },
       {
         "label": "M",
-        "value": "20",
+        "value": 20,
       },
       {
         "label": "L",
-        "value": "30",
+        "value": 30,
       },
     ],
     "range": undefined,
@@ -129,19 +155,19 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
     "options": [
       {
         "label": undefined,
-        "value": "0",
+        "value": 0,
       },
       {
         "label": undefined,
-        "value": "1",
+        "value": 1,
       },
       {
         "label": undefined,
-        "value": "2",
+        "value": 2,
       },
       {
         "label": undefined,
-        "value": "3",
+        "value": 3,
       },
     ],
     "range": undefined,
@@ -177,15 +203,15 @@ exports[`testing parameter parsing of openscad scripts testing example1.scad: ex
     "options": [
       {
         "label": "L",
-        "value": "10",
+        "value": 10,
       },
       {
         "label": "M",
-        "value": "20",
+        "value": 20,
       },
       {
         "label": "XL",
-        "value": "30",
+        "value": 30,
       },
     ],
     "range": undefined,
@@ -804,8 +830,8 @@ exports[`testing parameter parsing of openscad scripts testing printables-682650
     "name": "seed_value",
     "options": undefined,
     "range": undefined,
-    "type": "string",
-    "value": "-1",
+    "type": "number",
+    "value": -1,
   },
   {
     "description": undefined,
