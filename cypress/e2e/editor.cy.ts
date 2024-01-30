@@ -26,6 +26,62 @@ describe('editor', () => {
     cy.compareSnapshot('editor', 0.1);
   });
 
+  it('can render text through customizer', () => {
+    cy.intercept(
+      /https:\/\/github.com\/shantigilbert\/liberation-fonts-ttf\/archive\/refs\/heads\/master.zip/
+    ).as('liberationFonts');
+
+    cy.visit('/', {});
+
+    // Wait for initial rendering to finish
+    cy.get('button')
+      .contains('Render')
+      .find('span.MuiButton-startIcon')
+      .should('not.exist');
+
+    cy.get('textarea').clear();
+    cy.get('textarea').type(
+      'mytext = "Hello World";\n\nlinear_extrude() text(mytext);'
+    );
+    cy.get('button').contains('Render').click();
+
+    cy.wait(1000);
+
+    // Expect that the console has an error with "WARNING: Can't get font"
+    cy.get('[data-testid=console] pre').should(
+      'contain',
+      "WARNING: Can't get font"
+    );
+
+    // Go to the fonts tab
+    cy.get('button[aria-label="Fonts"]').click();
+
+    // Click the download button for the Liberation fonts
+    cy.get('button[data-start-path="liberation-fonts-ttf-master/"]').click();
+
+    // Wait for the download to finish
+    cy.wait('@liberationFonts', { timeout: 10000 });
+
+    // Go to the Customizer tab
+    cy.get('button[aria-label="Customizer"]').click();
+
+    // Set the `mytext` parameter to "Foo Bar"
+    cy.get('input[name="mytext"]').type('Foo Bar');
+
+    cy.get('button').contains('Render').click();
+
+    // Wait for the rendering to finish
+    cy.get('button')
+      .contains('Render')
+      .find('span.MuiButton-startIcon')
+      .should('not.exist');
+
+    // And wait for another 1000ms to make sure the rendering of the canvas is finished too.
+    cy.wait(1000);
+
+    cy.compareSnapshot('editor-text', 0.1);
+  });
+
   importUrls.forEach((url) => {
     it(`can render imported file ${url}`, () => {
       cy.intercept('/openscad.wasm').as('openscadWasm');

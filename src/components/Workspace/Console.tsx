@@ -15,7 +15,7 @@ export default function Console() {
   }, [log]);
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative' }} data-testid="console">
       <IconButton
         onClick={resetLog}
         sx={{ position: 'static', top: 5, right: 5 }}
