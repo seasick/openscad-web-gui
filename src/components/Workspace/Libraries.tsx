@@ -6,16 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import React from 'react';
 
 import commonLibraries from '../../etc/libraries.json';
-import FileWithPath from '../../lib/FileWithPath';
-import { useFileSystemProvider } from '../FileSystemProvider';
+import useUrlFileWriter from '../../hooks/useUrlFileWriter';
 
 export default function Libraries() {
-  const { writeFiles } = useFileSystemProvider();
-  const [isLoading, setLoading] = React.useState({});
+  const { write, isLoading } = useUrlFileWriter();
   const [isAvailable, setAvailable] = React.useState({});
 
   const handleDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,34 +20,11 @@ export default function Libraries() {
     const startPath = event.currentTarget.dataset.startPath;
     const path = event.currentTarget.dataset.path;
 
-    setLoading({ ...isLoading, [url]: true });
-
-    const response = await fetch('__CORSPROXY' + url);
-
-    // Unzip the file
-    const zip = await response.blob();
-    const files = await new ZipReader(new BlobReader(zip)).getEntries();
-
-    // Libraries should go into the library folder
-    const movedFiles = await Promise.all(
-      files
-        .filter((f) => f.directory === false)
-        .map(async (f) => {
-          const writer = new Uint8ArrayWriter();
-          const fileName = path + f.filename.replace(startPath, '');
-          const name = fileName.split('/').pop();
-
-          return new FileWithPath([await f.getData(writer)], name, {
-            lastModified: f.lastModDate.getTime(),
-            path: 'libraries/' + fileName,
-          }) as FileWithPath;
-        })
-    );
-
-    await writeFiles(movedFiles);
+    await write(url, (fileName) => {
+      return 'libraries/' + path + fileName.replace(startPath, '');
+    });
 
     setAvailable({ ...isAvailable, [url]: true });
-    setLoading({ ...isLoading, [url]: false });
   };
 
   const libraryIsAlreadyDownloaded = (lib) => {
