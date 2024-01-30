@@ -3,8 +3,8 @@ import FolderIcon from '@mui/icons-material/Folder';
 import FontDownloadIcon from '@mui/icons-material/FontDownload';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import TuneIcon from '@mui/icons-material/Tune';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 import React from 'react';
 
 import { EditorMode } from '../Workspace';
@@ -16,37 +16,43 @@ type Props = {
 
 export default function Sidebar({ onChange, mode }: Props) {
   const handleMode = (
-    event: React.MouseEvent<HTMLElement>,
-    newMode: string
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
+    const newMode = event.currentTarget.dataset.value;
     if (newMode !== null) {
       onChange(newMode as EditorMode);
     }
   };
 
+  const buttons = [
+    { value: 'editor', icon: <CodeIcon />, label: 'Script Editor' },
+    { value: 'customizer', icon: <TuneIcon />, label: 'Customizer' },
+    { value: 'file', icon: <FolderIcon />, label: 'File Manager' },
+    { value: 'libraries', icon: <LibraryBooksIcon />, label: 'Libraries' },
+    { value: 'fonts', icon: <FontDownloadIcon />, label: 'Fonts' },
+  ];
+
   return (
-    <ToggleButtonGroup
-      value={mode}
-      orientation="vertical"
-      exclusive
-      onChange={handleMode}
-      aria-label="text alignment"
+    <Stack
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="center"
+      spacing={1}
     >
-      <ToggleButton value="editor" aria-label="Script Editor">
-        <CodeIcon />
-      </ToggleButton>
-      <ToggleButton value="customizer" aria-label="Customizer">
-        <TuneIcon />
-      </ToggleButton>
-      <ToggleButton value="file" aria-label="File Manager">
-        <FolderIcon />
-      </ToggleButton>
-      <ToggleButton value="libraries" aria-label="Libraries">
-        <LibraryBooksIcon />
-      </ToggleButton>
-      <ToggleButton value="fonts" aria-label="Fonts">
-        <FontDownloadIcon />
-      </ToggleButton>
-    </ToggleButtonGroup>
+      {buttons.map((button) => (
+        <IconButton
+          aria-label={button.label}
+          color={mode === button.value ? 'primary' : 'default'}
+          data-value={button.value}
+          key={button.value}
+          onClick={handleMode}
+          sx={{
+            backgroundColor: mode === button.value ? '#e0e0e0' : 'inherit',
+          }}
+        >
+          {button.icon}
+        </IconButton>
+      ))}
+    </Stack>
   );
 }
