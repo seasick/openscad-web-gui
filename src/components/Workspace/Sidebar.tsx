@@ -5,6 +5,7 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import TuneIcon from '@mui/icons-material/Tune';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 
 import { EditorMode } from '../Workspace';
@@ -40,18 +41,19 @@ export default function Sidebar({ onChange, mode }: Props) {
       spacing={1}
     >
       {buttons.map((button) => (
-        <IconButton
-          aria-label={button.label}
-          color={mode === button.value ? 'primary' : 'default'}
-          data-value={button.value}
-          key={button.value}
-          onClick={handleMode}
-          sx={{
-            backgroundColor: mode === button.value ? '#e0e0e0' : 'inherit',
-          }}
-        >
-          {button.icon}
-        </IconButton>
+        <Tooltip key={button.value} title={button.label} placement="right">
+          <IconButton
+            aria-label={button.label}
+            color={mode === button.value ? 'primary' : 'default'}
+            data-value={button.value}
+            onClick={handleMode}
+            sx={{
+              backgroundColor: mode === button.value ? '#e0e0e0' : 'inherit',
+            }}
+          >
+            {button.icon}
+          </IconButton>
+        </Tooltip>
       ))}
     </Stack>
   );
