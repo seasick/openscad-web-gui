@@ -10,6 +10,12 @@ describe('editor', () => {
   it('can render simple cube', () => {
     cy.visit('/', {});
 
+    // Wait for initial rendering to finish
+    cy.get('button')
+      .contains('Render')
+      .find('span.MuiButton-startIcon')
+      .should('not.exist');
+
     cy.get('textarea').clear();
     cy.get('textarea').type('cube([100, 20, 20]);');
     cy.get('button').contains('Render').click();
@@ -88,6 +94,12 @@ describe('editor', () => {
 
       cy.visit('/', {});
 
+      // Wait for the rendering to finish
+      cy.get('button')
+        .contains('Render')
+        .find('span.MuiButton-startIcon')
+        .should('not.exist');
+
       cy.get('button[aria-label="menu"]').click();
       cy.get('li[role="menuitem"]').contains('Import from URL').click();
 
@@ -104,8 +116,8 @@ describe('editor', () => {
         .find('span.MuiButton-startIcon')
         .should('not.exist');
 
-      // And wait for another 500ms to make sure the rendering of the canvas is finished too.
-      cy.wait(1000);
+      // And wait for another 3 seconds to make sure the rendering of the canvas is finished too.
+      cy.wait(3000);
 
       cy.compareSnapshot(`editor-import-${sanitizeUrl(url)}`, 0.1);
     });
