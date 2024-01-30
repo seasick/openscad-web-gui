@@ -28,6 +28,27 @@ onmessage = async (event: MessageEvent<WorkerMessage>) => {
         );
         break;
 
+      // Users want to read a file from OpenSCAD file system
+      case WorkerMessageType.FS_READ:
+        response = await openSCAD.readFile(
+          message.data as FileSystemWorkerMessageData
+        );
+        break;
+
+      // Users want to write a file to OpenSCAD file system
+      case WorkerMessageType.FS_WRITE:
+        response = await openSCAD.writeFile(
+          message.data as FileSystemWorkerMessageData
+        );
+        break;
+
+      // Users want to write a file to OpenSCAD file system
+      case WorkerMessageType.FS_UNLINK:
+        response = await openSCAD.unlinkFile(
+          message.data as FileSystemWorkerMessageData
+        );
+        break;
+
       default:
         throw new Error('Unknown message type');
     }
@@ -40,7 +61,7 @@ onmessage = async (event: MessageEvent<WorkerMessage>) => {
   } catch (err) {
     // https://stackoverflow.com/a/40081158/1706846
     setTimeout(function () {
-      postMessage({ id: message.id, error: err });
+      postMessage({ id: message.id, err });
     });
   }
 };

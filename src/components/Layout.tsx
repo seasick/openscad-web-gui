@@ -45,6 +45,7 @@ export default function Layout({ title, children }: Props) {
       >
         <Toolbar>
           <IconButton
+            id="menu-button"
             size="large"
             edge="start"
             color="inherit"
@@ -60,7 +61,7 @@ export default function Layout({ title, children }: Props) {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              'aria-labelledby': 'menu-button',
             }}
           >
             <MenuItem onClick={handleClose} id="import_from_url">

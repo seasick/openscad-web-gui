@@ -8,6 +8,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from './App';
+import FileSystemProvider from './components/FileSystemProvider';
 import Layout from './components/Layout';
 import OpenscadWorkerProvider from './components/OpenscadWorkerProvider';
 
@@ -15,11 +16,13 @@ createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <CssBaseline />
     <SnackbarProvider />
-    <OpenscadWorkerProvider>
-      <Layout title="OpenSCAD Web GUI">
-        <App />
-      </Layout>
-    </OpenscadWorkerProvider>
+    <FileSystemProvider>
+      <OpenscadWorkerProvider>
+        <Layout title="OpenSCAD Web GUI">
+          <App />
+        </Layout>
+      </OpenscadWorkerProvider>
+    </FileSystemProvider>
   </React.StrictMode>
 );
 

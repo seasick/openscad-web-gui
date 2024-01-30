@@ -1,4 +1,5 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Alert, AlertTitle } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -10,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import { MuiChipsInput } from 'mui-chips-input';
 import React, { useMemo } from 'react';
 
-import { Parameter } from '../lib/openSCAD/parseParameter';
+import { Parameter } from '../../lib/openSCAD/parseParameter';
 
 type Parameters = Parameter[];
 
@@ -94,6 +95,10 @@ export default function Customizer({ parameters, onChange }: Props) {
 
   return (
     <div style={{ height: '100%', overflow: 'scroll' }}>
+      <Alert severity="info" sx={{ mb: 1 }}>
+        <AlertTitle>Customizer</AlertTitle>
+        Adjust the parameters of your design.
+      </Alert>
       {Object.entries(groups)
         .filter((x) => x[0].toLowerCase() !== 'hidden')
         .map(([groupName, groupParams], idx) => (

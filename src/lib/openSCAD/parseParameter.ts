@@ -114,7 +114,9 @@ export default function parseParameters(script: string): Parameter[] {
             .trim()
             .split(',')
             .map((option) => {
-              let [value, label] = option.trim().split(':');
+              const parts = option.trim().split(':');
+              let value = parts[0];
+              const label = parts[1];
               if (typeAndValue.type === 'number') {
                 value = parseFloat(value);
               }

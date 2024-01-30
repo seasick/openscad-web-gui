@@ -1,9 +1,11 @@
-import { Box, CircularProgress, Paper, styled } from '@mui/material';
+import { styled } from '@mui/material';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import React from 'react';
 
-import Editor from './components/Editor';
 import ErrorBox from './components/ErrorBox';
-import ImportFileSelector from './components/ImportFileSelector';
+import { useFileSystemProvider } from './components/FileSystemProvider';
+import Workspace from './components/Workspace';
 import useImport from './hooks/useImport';
 
 const MyBox = styled(Box)(({ theme }) => ({
@@ -19,9 +21,8 @@ const MyBox = styled(Box)(({ theme }) => ({
 export default function App() {
   const importUrl = getImportUrl();
 
-  const { error, files, isLoading } = useImport(importUrl);
-  const [selectedIndex, setSelectedIndex] = React.useState<number>();
-  let file: string | undefined;
+  const { error, isLoading } = useImport(importUrl);
+  const { files } = useFileSystemProvider();
 
   // Show a loading indicator during the import.
   if (isLoading) {
@@ -49,27 +50,7 @@ export default function App() {
     );
   }
 
-  // If there are multiple files, let the user select the one to import.
-  if (files.length > 1 && selectedIndex === undefined) {
-    return (
-      <MyBox>
-        <Paper sx={{ p: 1 }}>
-          <ImportFileSelector files={files} onSelect={setSelectedIndex} />
-        </Paper>
-      </MyBox>
-    );
-  }
-
-  // If there is only one file, we can directly import it.
-  if (files.length === 1) {
-    file = files[0].url;
-
-    // If the user has selected a file, we can import it.
-  } else if (selectedIndex !== undefined && files.length > selectedIndex) {
-    file = files[selectedIndex].url;
-  }
-
-  return <Editor url={file} initialMode={file ? 'customizer' : undefined} />;
+  return <Workspace />;
 }
 
 function getImportUrl(): string | undefined {

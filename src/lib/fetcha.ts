@@ -9,16 +9,20 @@ export type FetchaFile = {
 
 export default async function fetcha(url: string): Promise<FetchaFile[]> {
   // Depending on the host of the url, we will use a different fetch method
-  // to get the data.
+  // to extract the download url(s).
   const host = new URL(url).host;
+  const excludeStlRegex = /\.(?!stl)(?!3mf).*$/;
 
   switch (host) {
+    // Printables
     case 'printables.com':
     case 'www.printables.com':
-      return await printablesComFetcha(url, '.scad');
+      return await printablesComFetcha(url, excludeStlRegex);
+
+    // Thingiverse
     case 'thingiverse.com':
     case 'www.thingiverse.com':
-      return await thingiverseComFetcha(url, '.scad');
+      return await thingiverseComFetcha(url, excludeStlRegex);
     default: {
       const urlParts = url.split('/');
 

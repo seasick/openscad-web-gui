@@ -2,7 +2,7 @@ import { FetchaFile } from '../fetcha';
 
 export default async function thingiverseComFetcha(
   url: string,
-  fileNameFilter?: string
+  fileNameFilter?: { [Symbol.match](string: string): RegExpMatchArray | null }
 ): Promise<FetchaFile[]> {
   // Url is expected to look like `https://www.thingiverse.com/thing:2523187`.
   // We need to extract the id from the url, which is `2523187` in this case.
