@@ -9,30 +9,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import React from 'react';
 
+import commonLibraries from '../../etc/libraries.json';
 import FileWithPath from '../../lib/FileWithPath';
 import { useFileSystemProvider } from '../FileSystemProvider';
-
-const commonLibraries = [
-  {
-    name: 'BOSL2',
-    description: 'A library for OpenSCAD that includes a number of utilities.',
-    url: 'https://github.com/BelfrySCAD/BOSL2/archive/refs/heads/master.zip',
-    startPath: 'BOSL2-master',
-  },
-  {
-    name: 'BOSL',
-    description: 'A library for OpenSCAD that includes a number of utilities.',
-    url: 'https://github.com/revarbat/BOSL/archive/refs/tags/v1.0.3.zip',
-    startPath: 'BOSL-1.0.3',
-  },
-  {
-    name: 'Round-Anything',
-    description:
-      'A set of OpenSCAD utilities for adding radii and fillets, that embodies a robust approach to developing OpenSCAD parts.',
-    url: 'https://github.com/Irev-Dev/Round-Anything/archive/refs/tags/1.0.4.zip',
-    startPath: 'Round-Anything-1.0.4',
-  },
-];
 
 export default function Libraries() {
   const { writeFiles } = useFileSystemProvider();

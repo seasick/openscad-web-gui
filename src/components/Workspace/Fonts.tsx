@@ -9,18 +9,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import React from 'react';
 
+import commonFonts from '../../etc/fonts.json';
 import FileWithPath from '../../lib/FileWithPath';
 import { useFileSystemProvider } from '../FileSystemProvider';
-
-const commonLibraries = [
-  {
-    name: 'Liberation Fonts',
-    description:
-      'The Liberation Fonts is font collection which aims to provide document layout compatibility as usage of Times New Roman, Arial, Courier New.',
-    url: 'https://github.com/shantigilbert/liberation-fonts-ttf/archive/refs/heads/master.zip',
-    startPath: 'liberation-fonts-ttf-master/',
-  },
-];
 
 export default function Fonts() {
   const { writeFiles } = useFileSystemProvider();
@@ -39,7 +30,7 @@ export default function Fonts() {
     const zip = await response.blob();
     const files = await new ZipReader(new BlobReader(zip)).getEntries();
 
-    // Libraries should go into the library folder
+    // Fonts should go into the font folder
     const movedFiles = await Promise.all(
       files
         .filter((f) => f.directory === false)
@@ -62,7 +53,7 @@ export default function Fonts() {
     setLoading({ ...isLoading, [url]: false });
   };
 
-  const libraryIsAlreadyDownloaded = (lib) => {
+  const fontIsAlreadyDownloaded = (lib) => {
     return isAvailable[lib.url];
   };
 
@@ -70,23 +61,23 @@ export default function Fonts() {
     <>
       <Alert severity="info">
         <AlertTitle>Libraries</AlertTitle>
-        Select which common libraries to include in your project.
+        Select which common font to include in your project.
       </Alert>
       <List>
-        {commonLibraries.map((lib) => (
+        {commonFonts.map((font) => (
           <ListItem
-            key={lib.name}
+            key={font.name}
             secondaryAction={
               isAvailable && (
                 <IconButton
                   edge="end"
-                  aria-label="download library"
+                  aria-label="download font"
                   onClick={handleDownload}
-                  disabled={libraryIsAlreadyDownloaded(lib)}
-                  data-url={lib.url}
-                  data-start-path={lib.startPath}
+                  disabled={fontIsAlreadyDownloaded(font)}
+                  data-url={font.url}
+                  data-start-path={font.startPath}
                 >
-                  {isLoading[lib.url] ? (
+                  {isLoading[font.url] ? (
                     <LoopIcon sx={{ animation: 'spin 2s linear infinite' }} />
                   ) : (
                     <DownloadIcon />
@@ -95,7 +86,7 @@ export default function Fonts() {
               )
             }
           >
-            <ListItemText primary={lib.name} secondary={lib.description} />
+            <ListItemText primary={font.name} secondary={font.description} />
           </ListItem>
         ))}
       </List>
