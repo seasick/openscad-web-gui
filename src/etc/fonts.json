@@ -7,13 +7,6 @@
     "size": 353136
   },
   {
-    "name": "DejaVu Fonts",
-    "description": "The DejaVu fonts are a font family based on the Vera Fonts. Its purpose is to provide a wider range of characters while maintaining the original look and feel through the process of collaborative development.",
-    "url": "https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip",
-    "trimFromStartPath": "dejavu-fonts-ttf-2.37/",
-    "size": 5522795
-  },
-  {
     "name": "Liberation Fonts",
     "description": "The Liberation Fonts is font collection which aims to provide document layout compatibility as usage of Times New Roman, Arial, Courier New.",
     "url": "https://github.com/shantigilbert/liberation-fonts-ttf/archive/refs/heads/master.zip",
