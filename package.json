@@ -21,7 +21,7 @@
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "cors-anywhere": "^0.4.4",
-    "cypress": "^13.6.3",
+    "cypress": "^13.6.4",
     "cypress-multi-reporters": "^1.6.4",
     "cypress-terminal-report": "^5.3.12",
     "cypress-visual-regression": "^4.0.0",
