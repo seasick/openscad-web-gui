@@ -17,12 +17,12 @@ export default function Fonts() {
 
   const handleDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const url = event.currentTarget.dataset.url;
-    const startPath = event.currentTarget.dataset.startPath;
+    const trimFromStartPath = event.currentTarget.dataset.trimFromStartPath;
 
     await write(
       url,
       (fileName) => {
-        return 'fonts/' + fileName.replace(startPath, '');
+        return 'fonts/' + fileName.replace(trimFromStartPath, '');
       },
       (fileName) => {
         return !!fileName.match(/\.(woff2?|ttf|otf|eot)$/i);
@@ -54,7 +54,7 @@ export default function Fonts() {
                   onClick={handleDownload}
                   disabled={fontIsAlreadyDownloaded(font)}
                   data-url={font.url}
-                  data-start-path={font.startPath}
+                  data-trim-from-start-path={font.trimFromStartPath}
                 >
                   {isLoading[font.url] ? (
                     <LoopIcon sx={{ animation: 'spin 2s linear infinite' }} />

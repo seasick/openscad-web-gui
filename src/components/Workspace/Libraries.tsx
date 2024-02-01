@@ -17,11 +17,11 @@ export default function Libraries() {
 
   const handleDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const url = event.currentTarget.dataset.url;
-    const startPath = event.currentTarget.dataset.startPath;
+    const trimFromStartPath = event.currentTarget.dataset.trimFromStartPath;
     const path = event.currentTarget.dataset.path;
 
     await write(url, (fileName) => {
-      return 'libraries/' + path + fileName.replace(startPath, '');
+      return 'libraries/' + path + fileName.replace(trimFromStartPath, '');
     });
 
     setAvailable({ ...isAvailable, [url]: true });
@@ -51,7 +51,7 @@ export default function Libraries() {
                   disabled={libraryIsAlreadyDownloaded(lib)}
                   data-url={lib.url}
                   data-path={lib.name}
-                  data-start-path={lib.startPath}
+                  data-trim-from-start-path={lib.trimFromStartPath}
                 >
                   {isLoading[lib.url] ? (
                     <LoopIcon sx={{ animation: 'spin 2s linear infinite' }} />
