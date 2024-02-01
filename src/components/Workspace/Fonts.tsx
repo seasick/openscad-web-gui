@@ -10,6 +10,7 @@ import React from 'react';
 
 import commonFonts from '../../etc/fonts.json';
 import useUrlFileWriter from '../../hooks/useUrlFileWriter';
+import Bytes from '../Bytes';
 
 export default function Fonts() {
   const { write, isLoading } = useUrlFileWriter();
@@ -65,7 +66,17 @@ export default function Fonts() {
               )
             }
           >
-            <ListItemText primary={font.name} secondary={font.description} />
+            <ListItemText
+              primary={
+                <p>
+                  {font.name}{' '}
+                  <i>
+                    <Bytes bytes={font.size} />
+                  </i>
+                </p>
+              }
+              secondary={font.description}
+            />
           </ListItem>
         ))}
       </List>

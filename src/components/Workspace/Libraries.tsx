@@ -10,6 +10,7 @@ import React from 'react';
 
 import commonLibraries from '../../etc/libraries.json';
 import useUrlFileWriter from '../../hooks/useUrlFileWriter';
+import Bytes from '../Bytes';
 
 export default function Libraries() {
   const { write, isLoading } = useUrlFileWriter();
@@ -62,7 +63,17 @@ export default function Libraries() {
               )
             }
           >
-            <ListItemText primary={lib.name} secondary={lib.description} />
+            <ListItemText
+              primary={
+                <p>
+                  {lib.name}{' '}
+                  <i>
+                    <Bytes bytes={lib.size} />
+                  </i>
+                </p>
+              }
+              secondary={lib.description}
+            />
           </ListItem>
         ))}
       </List>

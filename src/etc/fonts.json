@@ -3,6 +3,7 @@
     "name": "Liberation Fonts",
     "description": "The Liberation Fonts is font collection which aims to provide document layout compatibility as usage of Times New Roman, Arial, Courier New.",
     "url": "https://github.com/shantigilbert/liberation-fonts-ttf/archive/refs/heads/master.zip",
-    "trimFromStartPath": "liberation-fonts-ttf-master/"
+    "trimFromStartPath": "liberation-fonts-ttf-master/",
+    "size": 2279211
   }
 ]
