@@ -63,7 +63,9 @@ describe('editor', () => {
     cy.get('button[aria-label="Fonts"]').click();
 
     // Click the download button for the Liberation fonts
-    cy.get('button[data-start-path="liberation-fonts-ttf-master/"]').click();
+    cy.get(
+      'button[data-trim-from-start-path="liberation-fonts-ttf-master/"]'
+    ).click();
 
     // Wait for the download to finish
     cy.wait('@liberationFonts', { timeout: 10000 });
