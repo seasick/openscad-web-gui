@@ -49,17 +49,20 @@ export default function useImport(url?: string, autoImport = false) {
 
               // Iterate through known libraries and check if they are used in the file
               for (const library of libraries) {
+                // If the library is used, download it and add it to the files
                 if (
                   script.includes(library.name) &&
                   !importedLibraries.includes(library.name)
                 ) {
-                  // If the library is used, download it and add it to the files
+                  // Add to imported libraries now, not after promise is resolved. This is
+                  // to prevent the same library from being imported multiple times.
+                  importedLibraries.push(library.name);
+
                   await write(
                     library.url,
                     (fileName) =>
                       `libraries/${library.name + fileName.replace(library.trimFromStartPath, '')}`
                   );
-                  importedLibraries.push(library.name);
                 }
               }
 
@@ -70,13 +73,14 @@ export default function useImport(url?: string, autoImport = false) {
                     script.includes(variant) &&
                     !importedFonts.includes(font.name)
                   ) {
+                    importedFonts.push(font.name);
+
                     // If the font is used, download it and add it to the files
                     await write(
                       font.url,
                       (fileName) =>
                         `fonts/${font.name + fileName.replace(font.trimFromStartPath, '')}`
                     );
-                    importedFonts.push(font.name);
                   }
                 }
               }
