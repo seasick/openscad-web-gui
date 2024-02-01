@@ -12,7 +12,7 @@ export default function Console() {
 
   useEffect(() => {
     if (logRef.current) {
-      logRef.current.scrollTop = logRef.current.scrollHeight;
+      logRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [log]);
 
