@@ -2,28 +2,28 @@
   {
     "name": "BOSL2",
     "description": "A library for OpenSCAD that includes a number of utilities.",
-    "url": "https://github.com/BelfrySCAD/BOSL2/archive/refs/heads/master.zip",
+    "url": "https://codeload.github.com/BelfrySCAD/BOSL2/zip/refs/heads/master",
     "trimFromStartPath": "BOSL2-master",
     "size": 972628
   },
   {
     "name": "BOSL",
     "description": "A library for OpenSCAD that includes a number of utilities.",
-    "url": "https://github.com/revarbat/BOSL/archive/refs/tags/v1.0.3.zip",
+    "url": "https://codeload.github.com/revarbat/BOSL/zip/refs/tags/v1.0.3",
     "trimFromStartPath": "BOSL-1.0.3",
     "size": 138887
   },
   {
     "name": "MCAD",
     "description": "A library for OpenSCAD that includes a number of utilities.",
-    "url": "https://github.com/openscad/MCAD/archive/refs/heads/master.zip",
+    "url": "https://codeload.github.com/openscad/MCAD/zip/refs/heads/master",
     "trimFromStartPath": "MCAD-master",
     "size": 71488
   },
   {
     "name": "Round-Anything",
     "description": "A set of OpenSCAD utilities for adding radii and fillets, that embodies a robust approach to developing OpenSCAD parts.",
-    "url": "https://github.com/Irev-Dev/Round-Anything/archive/refs/tags/1.0.4.zip",
+    "url": "https://codeload.github.com/Irev-Dev/Round-Anything/zip/refs/tags/1.0.4",
     "trimFromStartPath": "Round-Anything-1.0.4",
     "size": 2369273
   }
