@@ -4,13 +4,15 @@
     "description": "Vera is a digital typeface superfamily with a liberal license. It was designed by Jim Lyles from the now-defunct Bitstream Inc. type foundry, and it is closely based on Bitstream Prima, for which Lyles was also responsible.",
     "url": "https://download.gnome.org/sources/ttf-bitstream-vera/1.10/ttf-bitstream-vera-1.10.zip",
     "trimFromStartPath": "ttf-bitstream-vera-1.10/",
-    "size": 353136
+    "size": 353136,
+    "variants": ["Vera Sans", "Vera Serif", "Vera Mono"]
   },
   {
     "name": "Liberation Fonts",
     "description": "The Liberation Fonts is font collection which aims to provide document layout compatibility as usage of Times New Roman, Arial, Courier New.",
     "url": "https://github.com/shantigilbert/liberation-fonts-ttf/archive/refs/heads/master.zip",
     "trimFromStartPath": "liberation-fonts-ttf-master/",
-    "size": 2279211
+    "size": 2279211,
+    "variants": ["Liberation Sans", "Liberation Serif", "Liberation Mono"]
   }
 ]

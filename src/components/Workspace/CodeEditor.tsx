@@ -33,11 +33,14 @@ export default function CodeEditor({
     }
   };
 
-  // Load the first .scad file in the list, but only if there is no code yet.
+  // Load the first .scad file in the list (which isn't in the libraries folder),
+  // but only if there is no code yet.
   useEffect(() => {
     if (files.length > 0 && !code) {
       (async () => {
-        const filtered = files.filter((f) => f.name.endsWith('.scad'));
+        const filtered = files.filter(
+          (f) => f.name.endsWith('.scad') && !f.path.startsWith('libraries')
+        );
 
         if (filtered.length) {
           onChange(await filtered[0].text());

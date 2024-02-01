@@ -21,7 +21,7 @@ const MyBox = styled(Box)(({ theme }) => ({
 export default function App() {
   const importUrl = getImportUrl();
 
-  const { error, isLoading } = useImport(importUrl);
+  const { error, isLoading } = useImport(importUrl, true);
   const { files } = useFileSystemProvider();
 
   // Show a loading indicator during the import.
