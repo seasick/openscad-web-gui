@@ -38,7 +38,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.6",
-    "@mui/material": "^5.15.6",
+    "@mui/material": "^5.15.7",
     "@mui/x-tree-view": "^6.17.0",
     "@zip.js/zip.js": "^2.7.34",
     "mui-chips-input": "^2.1.3",
