@@ -81,6 +81,11 @@ export default function parseParameters(script: string): Parameter[] {
       const value = match[2];
       const typeAndValue = convertType(value);
 
+      // If type and value cannot be determined, we do not use that parameter
+      if (!typeAndValue) {
+        continue;
+      }
+
       let description: string;
       let options: ParameterOption[];
       let range: ParameterRange;
@@ -202,8 +207,6 @@ function convertType(rawValue): {
         value: arrayValue.map((item) => item === 'true'),
         type: 'boolean[]',
       };
-    } else {
-      return { value: arrayValue, type: 'string[]' };
     }
   } else {
     // Remove quotes

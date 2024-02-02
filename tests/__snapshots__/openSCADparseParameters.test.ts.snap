@@ -14,6 +14,38 @@ exports[`testing parameter parsing of openscad scripts testing checkbox.scad: ch
 ]
 `;
 
+exports[`testing parameter parsing of openscad scripts testing dont_parse_variables.scad: dont_parse_variables.scad 1`] = `
+[
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "a",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 6,
+  },
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "b",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 7.5,
+  },
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "c",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 8,
+  },
+]
+`;
+
 exports[`testing parameter parsing of openscad scripts testing dropDownBox.scad: dropDownBox.scad 1`] = `
 [
   {
