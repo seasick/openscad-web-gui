@@ -147,11 +147,17 @@ export default function parseParameters(script: string): Parameter[] {
       // Now search for the comment right above the parameter definition. This is done
       // by splitting the script at the parameter definition and using the last line
       // before the definition.
-      const splitted = script
-        .split(new RegExp(`^${escapeRegExp(match[0])}`, 'gm'))[0]
-        .trim()
-        .split('\n')
-        .reverse();
+      let above = script.split(
+        new RegExp(`^${escapeRegExp(match[0])}`, 'gm')
+      )[0];
+
+      // Remove only the last newline if it exists. If we would remove more than one
+      // newline, we could remove an empty comment and use the comment above that.
+      if (above.endsWith('\n')) {
+        above = above.slice(0, -1);
+      }
+
+      const splitted = above.split('\n').reverse();
 
       const lastLineBeforeDefinition = splitted[0];
       if (lastLineBeforeDefinition.trim().startsWith('//')) {
