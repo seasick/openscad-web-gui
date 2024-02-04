@@ -2,7 +2,7 @@
 import { copy } from 'esbuild-plugin-copy';
 import { replace } from 'esbuild-plugin-replace';
 
-let defaultCorsProxy = 'https://corsproxy.io/?';
+let defaultCorsProxy = 'http://localhost:8888/';
 
 export default (opt_options) => {
   const corsProxy =
