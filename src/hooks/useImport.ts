@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useFileSystemProvider } from '../components/providers/FileSystemProvider';
 import fonts from '../etc/fonts.json';
 import libraries from '../etc/libraries.json';
-import FileWithPath from '../lib/FileWithPath';
+import WorkspaceFile from '../lib/WorkspaceFile';
 import fetcha from '../lib/fetcha';
 import useUrlFileWriter from './useUrlFileWriter';
 
@@ -20,7 +20,7 @@ export default function useImport(url?: string, autoImport = false) {
       try {
         if (!url) {
           await writeFiles([
-            new FileWithPath(['cube([10, 10, 10]);'], 'cube.scad'),
+            new WorkspaceFile(['cube([10, 10, 10]);'], 'cube.scad'),
           ]);
           return;
         }
@@ -86,7 +86,7 @@ export default function useImport(url?: string, autoImport = false) {
               }
             }
 
-            return new FileWithPath([content], name, {
+            return new WorkspaceFile([content], name, {
               path: name,
             });
           })

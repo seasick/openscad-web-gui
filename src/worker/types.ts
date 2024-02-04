@@ -1,4 +1,4 @@
-import FileWithPath from '../lib/FileWithPath';
+import WorkspaceFile from '../lib/WorkspaceFile';
 import { Parameter } from '../lib/openSCAD/parseParameter';
 
 export const enum WorkerMessageType {
@@ -49,5 +49,5 @@ export type OpenSCADWorkerResponseData = {
 
 export type FileSystemWorkerMessageData = {
   path: string;
-  content?: FileWithPath; // Content is only necessary when writing
+  content?: WorkspaceFile; // Content is only necessary when writing
 };

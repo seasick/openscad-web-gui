@@ -4,7 +4,7 @@ import {
   WorkerMessage,
   WorkerMessageType,
 } from '../../worker/types';
-import FileWithPath from '../FileWithPath';
+import WorkspaceFile from '../WorkspaceFile';
 import executeWorkerJob from '../executeWorkerJob';
 
 type Output = Omit<OpenSCADWorkerResponseData, 'output'> & { output: File };
@@ -26,10 +26,10 @@ export default async function executeOpenSCAD(
 
   const response = await executeWorkerJob(message);
   const data = response.data as OpenSCADWorkerResponseData;
-  let output: FileWithPath;
+  let output: WorkspaceFile;
 
   if (data.output) {
-    output = new FileWithPath([data.output], 'output.' + data.fileType);
+    output = new WorkspaceFile([data.output], 'output.' + data.fileType);
   }
 
   return {

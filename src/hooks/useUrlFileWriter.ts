@@ -2,7 +2,7 @@ import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import { useState } from 'react';
 
 import { useFileSystemProvider } from '../components/providers/FileSystemProvider';
-import FileWithPath from '../lib/FileWithPath';
+import WorkspaceFile from '../lib/WorkspaceFile';
 
 export default function useUrlFileWriter() {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ export default function useUrlFileWriter() {
           // Apply custom filter
           .filter((f) => !filter || filter(f.filename))
 
-          // Collect all files into an FileWithPath array
+          // Collect all files into an WorkspaceFile array
           .map(async (f) => {
             const writer = new Uint8ArrayWriter();
             const fileName = fileNameDecorator
@@ -39,10 +39,10 @@ export default function useUrlFileWriter() {
               : f.filename;
             const name = fileName.split('/').pop();
 
-            return new FileWithPath([await f.getData(writer)], name, {
+            return new WorkspaceFile([await f.getData(writer)], name, {
               lastModified: f.lastModDate.getTime(),
               path: fileName,
-            }) as FileWithPath;
+            }) as WorkspaceFile;
           })
       );
 
@@ -55,7 +55,7 @@ export default function useUrlFileWriter() {
         : url.split('/').pop();
 
       await writeFiles([
-        new FileWithPath([file], fileName, {
+        new WorkspaceFile([file], fileName, {
           lastModified: new Date().getTime(),
           path: fileName,
         }),

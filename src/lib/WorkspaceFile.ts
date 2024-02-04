@@ -1,4 +1,4 @@
-export default class FileWithPath extends File {
+export default class WorkspaceFile extends File {
   public path?: string;
 
   constructor(

@@ -1,4 +1,4 @@
-import FileWithPath from '../lib/FileWithPath.js';
+import WorkspaceFile from '../lib/WorkspaceFile.js';
 import OpenSCAD from '../vendor/openscad-wasm/openscad.js';
 import {
   FileSystemWorkerMessageData,
@@ -16,7 +16,7 @@ class OpenSCADWrapper {
     stdOut: [],
   };
 
-  files: FileWithPath[] = [];
+  files: WorkspaceFile[] = [];
 
   async getInstance(): Promise<OpenSCAD> {
     const instance = await OpenSCAD({

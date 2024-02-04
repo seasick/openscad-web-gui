@@ -12,11 +12,11 @@ import { enqueueSnackbar } from 'notistack';
 import * as React from 'react';
 import Dropzone from 'react-dropzone';
 
-import FileWithPath from '../../../lib/FileWithPath';
+import WorkspaceFile from '../../../lib/WorkspaceFile';
 
 type Props = {
   onClose: () => void;
-  onNewFile: (files: FileWithPath[]) => void;
+  onNewFile: (files: WorkspaceFile[]) => void;
   open: boolean;
 };
 
@@ -52,7 +52,7 @@ export default function ImportFromUrlDialog({
       const response = await fetch('__CORSPROXY' + url);
       if (response.ok) {
         const filename = url.substring(url.lastIndexOf('/') + 1); // TODO Strip query string
-        onNewFile([new FileWithPath([await response.blob()], filename)]);
+        onNewFile([new WorkspaceFile([await response.blob()], filename)]);
       } else {
         enqueueSnackbar('Failed to download file', { variant: 'error' });
       }

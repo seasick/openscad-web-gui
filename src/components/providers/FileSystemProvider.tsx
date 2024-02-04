@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-import FileWithPath from '../../lib/FileWithPath';
+import WorkspaceFile from '../../lib/WorkspaceFile';
 import executeWorkerJob from '../../lib/executeWorkerJob';
 import {
   FileSystemWorkerMessageData,
@@ -8,10 +8,10 @@ import {
 } from '../../worker/types';
 
 type ContextType = {
-  files: FileWithPath[];
-  writeFile: (file: FileWithPath) => Promise<void>;
-  writeFiles: (files: FileWithPath[]) => Promise<void>;
-  readFile: (path: string) => Promise<FileWithPath>;
+  files: WorkspaceFile[];
+  writeFile: (file: WorkspaceFile) => Promise<void>;
+  writeFiles: (files: WorkspaceFile[]) => Promise<void>;
+  readFile: (path: string) => Promise<WorkspaceFile>;
   unlinkFile: (path: string) => Promise<void>;
 };
 
@@ -24,11 +24,11 @@ type Props = {
 
 // Create a provider component
 export default function FileSystemProvider({ children }: Props) {
-  const [files, setFiles] = useState<FileWithPath[]>([]);
+  const [files, setFiles] = useState<WorkspaceFile[]>([]);
 
   const value = {
     files,
-    writeFile: async (file: FileWithPath) => {
+    writeFile: async (file: WorkspaceFile) => {
       await executeWorkerJob({
         type: WorkerMessageType.FS_WRITE,
         data: {
@@ -40,7 +40,7 @@ export default function FileSystemProvider({ children }: Props) {
       setFiles((files) => [...files.filter((f) => f.name !== file.name), file]);
     },
 
-    writeFiles: async (files2: FileWithPath[]) => {
+    writeFiles: async (files2: WorkspaceFile[]) => {
       await Promise.all(
         files2.map((file) => {
           const p = async () => {
@@ -74,7 +74,7 @@ export default function FileSystemProvider({ children }: Props) {
       const data = response.data as FileSystemWorkerMessageData;
       const name = data.path.split('/').pop();
 
-      return new FileWithPath([data.content], name, {
+      return new WorkspaceFile([data.content], name, {
         path: data.path,
       });
     },

@@ -14,7 +14,7 @@ import { enqueueSnackbar } from 'notistack';
 import * as React from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import FileWithPath from '../../lib/FileWithPath';
+import WorkspaceFile from '../../lib/WorkspaceFile';
 import { useFileSystemProvider } from '../providers/FileSystemProvider';
 import ImportFromUrlDialog from './FileSystem/ImportDialog';
 import StyledTreeItem from './FileSystem/StyledTreeItem';
@@ -34,11 +34,11 @@ export default function FileSystem() {
       await Promise.all(
         acceptedFiles.map(async (f) => {
           if (f.name.match(/\.(woff2?|ttf|otf|eot)$/i)) {
-            f = new FileWithPath([f], f.name, {
+            f = new WorkspaceFile([f], f.name, {
               type: 'font',
               lastModified: f.lastModified,
               path: 'libraries/' + f.path,
-            }) as FileWithPath;
+            }) as WorkspaceFile;
           } else if (f.name.match(/\.(zip)$/i)) {
             const files = await new ZipReader(new BlobReader(f)).getEntries();
 
@@ -52,10 +52,10 @@ export default function FileSystem() {
                   const writer = new Uint8ArrayWriter();
                   const name = f.filename.split('/').pop();
 
-                  return new FileWithPath([await f.getData(writer)], name, {
+                  return new WorkspaceFile([await f.getData(writer)], name, {
                     lastModified: f.lastModDate.getTime(),
                     path: 'libraries/' + f.filename,
-                  }) as FileWithPath;
+                  }) as WorkspaceFile;
                 })
             );
           }
@@ -179,7 +179,7 @@ type TreeItemStruct = {
   path: string;
 };
 
-function recursiveTree(files: FileWithPath[]): TreeItemStruct[] {
+function recursiveTree(files: WorkspaceFile[]): TreeItemStruct[] {
   const tree = [];
 
   for (const file of files) {
