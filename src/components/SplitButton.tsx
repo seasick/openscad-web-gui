@@ -9,10 +9,15 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import * as React from 'react';
 
+type Option = {
+  label: string;
+  value?: string;
+  disabled?: boolean;
+};
 interface Props {
   disabled?: boolean;
   onSelect: (option: string) => void;
-  options: string[];
+  options: string[] | Option[];
   startIcon?: React.ReactNode;
 }
 
@@ -26,17 +31,27 @@ export default function SplitButton({
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+  React.useEffect(() => {
+    setSelectedIndex(options.findIndex((option) => !option.disabled));
+  }, [options]);
+
   const handleClick = () => {
-    onSelect(options[selectedIndex]);
+    const selected = options[selectedIndex];
+    onSelect(
+      typeof selected === 'string' ? selected : selected.value || selected.label
+    );
   };
 
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     index: number
   ) => {
+    const selected = options[index];
     setSelectedIndex(index);
     setOpen(false);
-    onSelect(options[index]);
+    onSelect(
+      typeof selected === 'string' ? selected : selected.value || selected.label
+    );
   };
 
   const handleToggle = () => {
@@ -54,6 +69,11 @@ export default function SplitButton({
     setOpen(false);
   };
 
+  const selectedLabel =
+    typeof options[selectedIndex] === 'string'
+      ? options[selectedIndex]
+      : options[selectedIndex].label;
+
   return (
     <React.Fragment>
       <ButtonGroup
@@ -63,7 +83,7 @@ export default function SplitButton({
         disabled={disabled}
       >
         <Button onClick={handleClick} startIcon={startIcon}>
-          {options[selectedIndex]}
+          {selectedLabel}
         </Button>
         <Button
           size="small"
@@ -99,11 +119,12 @@ export default function SplitButton({
                 <MenuList id="split-button-menu" autoFocusItem>
                   {options.map((option, index) => (
                     <MenuItem
-                      key={option}
+                      key={option.label || option}
                       selected={index === selectedIndex}
                       onClick={(event) => handleMenuItemClick(event, index)}
+                      disabled={option.disabled}
                     >
-                      {option}
+                      {option.label || option}
                     </MenuItem>
                   ))}
                 </MenuList>

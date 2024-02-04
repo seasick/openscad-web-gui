@@ -1,7 +1,7 @@
 import LoopIcon from '@mui/icons-material/Loop';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { Parameter } from '../../lib/openSCAD/parseParameter';
 import SplitButton from '../SplitButton';
@@ -37,6 +37,19 @@ export default function Buttons({ code, parameters }: Props) {
   const handleRender = async () => {
     preview(code, parameters);
   };
+  const options = useMemo(() => {
+    const isSVG = previewFile && previewFile.name.endsWith('.svg');
+
+    // TODO: 3MF export was not enabled when building the OpenSCAD wasm module
+    return [
+      { label: 'Export STL', disabled: isSVG },
+      { label: 'Export OFF', disabled: isSVG },
+      { label: 'Export AMF', disabled: isSVG },
+      { label: 'Export CSG', disabled: isSVG },
+      { label: 'Export DXF', disabled: !isSVG },
+      { label: 'Export SVG', disabled: !isSVG },
+    ];
+  }, [previewFile]);
 
   useEffect(() => {
     if (exportFile) {
@@ -64,15 +77,7 @@ export default function Buttons({ code, parameters }: Props) {
       </Button>
       <SplitButton
         disabled={isRendering || isExporting || !previewFile}
-        options={[
-          'Export STL',
-          'Export OFF',
-          'Export AMF',
-          // 'Export 3MF', // TODO: 3MF export was not enabled when building the OpenSCAD wasm module
-          'Export CSG',
-          'Export DXF',
-          'Export SVG',
-        ]}
+        options={options}
         startIcon={isExporting && <LoopIcon sx={loopAnimation} />}
         onSelect={async (selectedLabel: string) => {
           const fileType = selectedLabel.split(' ')[1].toLowerCase();
