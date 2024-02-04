@@ -36,7 +36,7 @@ describe('editor', () => {
 
   it('can render text through customizer', () => {
     cy.intercept(
-      /https:\/\/github.com\/shantigilbert\/liberation-fonts-ttf\/archive\/refs\/heads\/master.zip/
+      /https:\/\/codeload.github.com\/shantigilbert\/liberation-fonts-ttf\/zip\/refs\/heads\/master/
     ).as('liberationFonts');
 
     cy.visit('/', {});
