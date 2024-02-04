@@ -28,7 +28,7 @@ export default async function thingiverseComFetcha(
 
   // With the token we can now get the list of files
   const thingResponse = await fetch(
-    `https://api.thingiverse.com/things/${idString}`,
+    '__CORSPROXY' + `https://api.thingiverse.com/things/${idString}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
