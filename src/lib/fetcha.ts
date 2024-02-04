@@ -12,7 +12,7 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
   // Depending on the host of the url, we will use a different fetch method
   // to extract the download url(s).
   const host = new URL(url).host;
-  const excludeStlRegex = /\.(?!stl)(?!3mf).*$/;
+  const excludeStlRegex = /\.(?!3mf).*$/;
 
   switch (host) {
     // Printables
