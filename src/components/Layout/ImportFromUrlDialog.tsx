@@ -41,12 +41,14 @@ export default function ImportFromUrlDialog({ onClose }: Props) {
               </pre>
               )
             </li>
-            <li>
+
+            {/* TODO Fix Thingiverse import */}
+            {/* <li>
               Thingiverse (url should look like{' '}
               <pre style={{ display: 'contents' }}>
                 https://www.thingiverse.com/thing:12345
               </pre>
-            </li>
+            </li> */}
           </ul>
         </Alert>
         <TextField

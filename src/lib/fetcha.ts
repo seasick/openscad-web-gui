@@ -20,9 +20,12 @@ export default async function fetcha(url: string): Promise<FetchaFile[]> {
       return await printablesComFetcha(url, excludeStlRegex);
 
     // Thingiverse
-    case 'thingiverse.com':
+    // TODO: Thingiverse is currently not working, because there is some cookie check
+    // at `api.thingiverse.com` in place
+    /* case 'thingiverse.com':
     case 'www.thingiverse.com':
-      return await thingiverseComFetcha(url, excludeStlRegex);
+      return await thingiverseComFetcha(url, excludeStlRegex);*/
+
     default: {
       const urlParts = url.split('/');
 
