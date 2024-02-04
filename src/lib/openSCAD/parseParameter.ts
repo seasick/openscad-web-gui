@@ -183,7 +183,7 @@ function convertType(rawValue): {
   value: string | boolean | number;
   type: ParameterType;
 } {
-  if (/^-?\d+(\.\d+)?$/.test(rawValue)) {
+  if (/^-?\d*(\.\d+)?$/.test(rawValue)) {
     // Raw value matches something like `123.123` or `123`.
     return { value: parseFloat(rawValue), type: 'number' };
   } else if (rawValue === 'true' || rawValue === 'false') {

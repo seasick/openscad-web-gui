@@ -503,6 +503,47 @@ exports[`testing parameter parsing of openscad scripts testing newlineAboveVaria
 ]
 `;
 
+exports[`testing parameter parsing of openscad scripts testing numbers.scad: numbers.scad 1`] = `
+[
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "number1",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 0.16,
+  },
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "number2",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 0.16,
+  },
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "number3",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 0.16,
+  },
+  {
+    "description": undefined,
+    "group": undefined,
+    "name": "number4",
+    "options": undefined,
+    "range": undefined,
+    "type": "number",
+    "value": 0.16,
+  },
+]
+`;
+
 exports[`testing parameter parsing of openscad scripts testing printables-513382.scad: printables-513382.scad 1`] = `
 [
   {
