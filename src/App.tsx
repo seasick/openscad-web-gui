@@ -6,6 +6,7 @@ import React from 'react';
 import ErrorBox from './components/ErrorBox';
 import Workspace from './components/Workspace';
 import { useFileSystemProvider } from './components/providers/FileSystemProvider';
+import WorkspaceProvider from './components/providers/WorkspaceProvider';
 import useImport from './hooks/useImport';
 
 const MyBox = styled(Box)(({ theme }) => ({
@@ -50,7 +51,11 @@ export default function App() {
     );
   }
 
-  return <Workspace />;
+  return (
+    <WorkspaceProvider>
+      <Workspace initialMode={importUrl ? 'customizer' : 'editor'} />
+    </WorkspaceProvider>
+  );
 }
 
 function getImportUrl(): string | undefined {

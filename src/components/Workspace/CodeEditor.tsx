@@ -1,25 +1,22 @@
 import { Alert, AlertTitle, SelectChangeEvent } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useFileSystemProvider } from '../providers/FileSystemProvider';
+import { useWorkspaceProvider } from '../providers/WorkspaceProvider';
 import FileSelector from './FileSystem/FileSelector';
 
 interface CodeEditorProps {
-  code: string;
   disabled?: boolean;
-  onChange: (newCode: string) => void;
 }
 
-export default function CodeEditor({
-  code,
-  disabled,
-  onChange,
-}: CodeEditorProps) {
-  const handleCodeChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(event.target.value);
-  };
+export default function CodeEditor({ disabled }: CodeEditorProps) {
+  const { code, setCode, selectedFile, setSelectedFile } =
+    useWorkspaceProvider();
   const { files } = useFileSystemProvider();
-  const [selectedFile, setSelectedFile] = React.useState<string>();
+
+  const handleCodeChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCode(event.target.value);
+  };
 
   // Load the selected file.
   const handleFileSelect = (event: SelectChangeEvent<string>) => {
@@ -27,28 +24,11 @@ export default function CodeEditor({
 
     if (file) {
       (async () => {
-        onChange(await file.text());
+        setCode(await file.text());
         setSelectedFile(file.path);
       })();
     }
   };
-
-  // Load the first .scad file in the list (which isn't in the libraries folder),
-  // but only if there is no code yet.
-  useEffect(() => {
-    if (files.length > 0 && !code) {
-      (async () => {
-        const filtered = files.filter(
-          (f) => f.name.endsWith('.scad') && !f.path.startsWith('libraries')
-        );
-
-        if (filtered.length) {
-          onChange(await filtered[0].text());
-          setSelectedFile(filtered[0].path);
-        }
-      })();
-    }
-  }, [files, onChange]);
 
   return (
     <div style={{ height: '100%', display: 'flex', flexFlow: 'column' }}>

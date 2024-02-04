@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { Parameter } from '../lib/openSCAD/parseParameter';
 import parseOpenScadParameters from '../lib/openSCAD/parseParameter';
@@ -14,6 +14,7 @@ import Libraries from './Workspace/Libraries';
 import Preview from './Workspace/Preview';
 import Sidebar from './Workspace/Sidebar';
 import { useOpenSCADProvider } from './providers/OpenscadWorkerProvider';
+import { useWorkspaceProvider } from './providers/WorkspaceProvider';
 
 export type EditorMode =
   | 'editor'
@@ -22,18 +23,15 @@ export type EditorMode =
   | 'libraries'
   | 'fonts';
 
-export default function Workspace() {
-  const { preview, previewFile, isRendering } = useOpenSCADProvider();
-  const [mode, setMode] = React.useState<EditorMode>('editor');
-  const [code, setCode] = React.useState<string>('');
-  const [parameters, setParameters] = React.useState<Parameter[]>([]);
+interface Props {
+  initialMode: EditorMode;
+}
 
-  const handleCodeChange = useCallback(
-    (newCode: string) => {
-      setCode(newCode);
-    },
-    [setCode]
-  );
+export default function Workspace({ initialMode }: Props) {
+  const { preview, previewFile, isRendering } = useOpenSCADProvider();
+  const { code } = useWorkspaceProvider();
+  const [mode, setMode] = React.useState<EditorMode>(initialMode || 'editor');
+  const [parameters, setParameters] = React.useState<Parameter[]>([]);
 
   // Whenever the code changes, attempt to parse the parameters
   useEffect(() => {
@@ -83,9 +81,7 @@ export default function Workspace() {
               onChange={(p) => setParameters(p)}
             />
           )}
-          {mode === 'editor' && (
-            <CodeEditor onChange={handleCodeChange} code={code} />
-          )}
+          {mode === 'editor' && <CodeEditor />}
           {mode === 'file' && <FileSystem />}
           {mode === 'libraries' && <Libraries />}
           {mode === 'fonts' && <Fonts />}
