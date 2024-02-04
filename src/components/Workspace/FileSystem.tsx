@@ -3,6 +3,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FolderIcon from '@mui/icons-material/Folder';
 import FileIcon from '@mui/icons-material/InsertDriveFile';
+import PolylineIcon from '@mui/icons-material/Polyline';
 import { Alert, AlertTitle } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -17,6 +18,11 @@ import FileWithPath from '../../lib/FileWithPath';
 import { useFileSystemProvider } from '../providers/FileSystemProvider';
 import ImportFromUrlDialog from './FileSystem/ImportDialog';
 import StyledTreeItem from './FileSystem/StyledTreeItem';
+
+const fileIcons = {
+  svg: PolylineIcon,
+  default: FileIcon,
+};
 
 export default function FileSystem() {
   const { files, unlinkFile, writeFiles } = useFileSystemProvider();
@@ -104,6 +110,9 @@ export default function FileSystem() {
           </StyledTreeItem>
         );
       } else {
+        const extension = file.name.split('.').pop();
+        const ItemIcon = fileIcons[extension] || fileIcons.default;
+
         tree.push(
           <StyledTreeItem
             key={file.path}
@@ -114,7 +123,7 @@ export default function FileSystem() {
                 <DeleteIcon />
               </IconButton>
             }
-            labelIcon={FileIcon}
+            labelIcon={ItemIcon}
           />
         );
       }
