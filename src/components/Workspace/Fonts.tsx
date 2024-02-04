@@ -38,10 +38,11 @@ export default function Fonts() {
   };
 
   return (
-    <>
+    <div style={{ height: '100%', overflow: 'scroll' }}>
       <Alert severity="info">
         <AlertTitle>Libraries</AlertTitle>
-        Select which common font to include in your project.
+        Select which common font to include in your project. You can also upload
+        your own through the file manager.
       </Alert>
       <List>
         {commonFonts.map((font) => (
@@ -70,9 +71,11 @@ export default function Fonts() {
               primary={
                 <p>
                   {font.name}{' '}
-                  <i>
-                    <Bytes bytes={font.size} />
-                  </i>
+                  {font.size && (
+                    <i>
+                      <Bytes bytes={font.size} />
+                    </i>
+                  )}
                 </p>
               }
               secondary={font.description}
@@ -80,6 +83,6 @@ export default function Fonts() {
           </ListItem>
         ))}
       </List>
-    </>
+    </div>
   );
 }
