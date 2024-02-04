@@ -1,5 +1,6 @@
 import printablesComFetcha from './fetcha/printables.com';
-import thingiverseComFetcha from './fetcha/thingiverse.com';
+
+// import thingiverseComFetcha from './fetcha/thingiverse.com';
 
 export type FetchaFile = {
   name: string;
