@@ -7,7 +7,7 @@ import { Environment } from './Environment';
 import Model from './Model';
 
 type Props = JSX.IntrinsicElements['group'] & {
-  geometry: THREE.Mesh;
+  geometry: THREE.Group;
 };
 
 export default function ThreeJsCanvas({ geometry }: Props) {

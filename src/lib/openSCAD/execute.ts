@@ -29,7 +29,7 @@ export default async function executeOpenSCAD(
   let output: FileWithPath;
 
   if (data.output) {
-    output = new FileWithPath([data.output], 'output.stl');
+    output = new FileWithPath([data.output], 'output.' + data.fileType);
   }
 
   return {

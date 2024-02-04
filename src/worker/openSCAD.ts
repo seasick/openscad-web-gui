@@ -6,6 +6,10 @@ import {
   OpenSCADWorkerResponseData,
 } from './types';
 
+const fontsConf = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig></fontconfig>`;
+
 class OpenSCADWrapper {
   log = {
     stdErr: [],
@@ -25,12 +29,7 @@ class OpenSCADWrapper {
     this.createDirectoryRecusive(instance, 'fonts');
 
     // Write the font.conf file
-    instance.FS.writeFile(
-      '/fonts/fonts.conf',
-      `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig></fontconfig>`
-    );
+    instance.FS.writeFile('/fonts/fonts.conf', fontsConf);
 
     for (const file of this.files) {
       // Make sure the directory of the file exists
@@ -126,13 +125,48 @@ class OpenSCADWrapper {
       })
       .filter((x) => !!x);
 
-    parameters.push('--export-format=binstl');
-    parameters.push(`--enable=manifold`);
-    parameters.push(`--enable=fast-csg`);
-    parameters.push(`--enable=lazy-union`);
-    parameters.push('--enable=roof');
+    const exportParams = [
+      '--export-format=binstl',
+      '--enable=manifold',
+      '--enable=fast-csg',
+      '--enable=lazy-union',
+      '--enable=roof',
+    ];
 
-    return await this.executeOpenscad(data.code, data.fileType, parameters);
+    const render = await this.executeOpenscad(
+      data.code,
+      data.fileType,
+      parameters.concat(exportParams)
+    );
+
+    // Check `render.log.stdErr` for "Current top level object is not a 3d object."
+    // and if it is, rerun it with exporting the preview as a SVG.
+    if (
+      render.log.stdErr.includes('Current top level object is not a 3D object.')
+    ) {
+      // Create the SVG, which will internally be saved as out.svg
+      const svgExport = await this.executeOpenscad(
+        data.code,
+        'svg',
+        parameters.concat([
+          '--export-format=svg',
+          '--enable=manifold',
+          '--enable=fast-csg',
+          '--enable=lazy-union',
+          '--enable=roof',
+        ])
+      );
+
+      if (svgExport.exitCode === 0) {
+        return svgExport;
+      }
+
+      // If the SVG export failed, return the original error, but add the logs from the SVG export
+      render.log.stdErr.push(...svgExport.log.stdErr);
+      render.log.stdOut.push(...svgExport.log.stdOut);
+    }
+
+    return render;
   }
 
   async writeFile(data: FileSystemWorkerMessageData) {
@@ -209,7 +243,6 @@ class OpenSCADWrapper {
     if (exitCode === 0) {
       try {
         output = instance.FS.readFile(outputFile);
-        instance.FS.unlink(outputFile);
       } catch (error) {
         throw new Error('OpenSCAD cannot read created file: ' + error.message);
       }

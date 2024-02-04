@@ -5,10 +5,11 @@ import * as THREE from 'three';
 import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
 import ThreeJsCanvas from './Preview/ThreeJsCanvas';
 import readFromSTLFile from './Preview/readFromSTLFile';
+import readFromSVGFile from './Preview/readFromSVGFile';
 
 export default function Preview() {
   const { previewFile, isRendering } = useOpenSCADProvider();
-  const [geometry, setGeometry] = React.useState<THREE.Mesh | null>(null);
+  const [geometry, setGeometry] = React.useState<THREE.Group | null>(null);
   const theme = useTheme();
 
   useEffect(() => {
@@ -16,24 +17,25 @@ export default function Preview() {
       return;
     }
 
-    // Convert STL file to ThreeJS geometry
-    readFromSTLFile(previewFile).then((geometry) => {
-      const material = new THREE.MeshLambertMaterial({
-        color: theme.palette.primary.main,
-        flatShading: true,
-      });
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.rotation.set(-Math.PI / 2, 0, 0); // z-up conversion
+    (async () => {
+      let newGeometry;
 
-      // Objects are way too big, scale them down.
-      mesh.scale.set(0.01, 0.01, 0.01);
-
-      mesh.traverse(function (child) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      });
-      setGeometry(mesh);
-    });
+      if (previewFile.name.endsWith('.stl')) {
+        newGeometry = await readFromSTLFile(
+          previewFile,
+          theme.palette.primary.main
+        );
+      } else if (previewFile.name.endsWith('.svg')) {
+        newGeometry = await readFromSVGFile(
+          previewFile,
+          theme.palette.primary.main,
+          theme.palette.secondary.main
+        );
+      } else {
+        throw new Error('Unsupported file type');
+      }
+      setGeometry(newGeometry);
+    })();
   }, [previewFile]);
 
   const loading = (
