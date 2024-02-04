@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useFileSystemProvider } from '../components/FileSystemProvider';
+import { useFileSystemProvider } from '../components/providers/FileSystemProvider';
 import fonts from '../etc/fonts.json';
 import libraries from '../etc/libraries.json';
 import FileWithPath from '../lib/FileWithPath';

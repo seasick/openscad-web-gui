@@ -1,7 +1,7 @@
 import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import { useState } from 'react';
 
-import { useFileSystemProvider } from '../components/FileSystemProvider';
+import { useFileSystemProvider } from '../components/providers/FileSystemProvider';
 import FileWithPath from '../lib/FileWithPath';
 
 export default function useUrlFileWriter() {

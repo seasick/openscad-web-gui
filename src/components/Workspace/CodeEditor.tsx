@@ -1,7 +1,7 @@
 import { Alert, AlertTitle, SelectChangeEvent } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import { useFileSystemProvider } from '../FileSystemProvider';
+import { useFileSystemProvider } from '../providers/FileSystemProvider';
 import FileSelector from './FileSystem/FileSelector';
 
 interface CodeEditorProps {

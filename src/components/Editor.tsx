@@ -11,7 +11,6 @@ import parseOpenScadParameters, {
   Parameter,
 } from '../lib/openSCAD/parseParameter';
 import { WorkerMessageType } from '../worker/types';
-import { useOpenSCADProvider } from './OpenscadWorkerProvider';
 import SplitButton from './SplitButton';
 import CodeEditor from './Workspace/CodeEditor';
 import Customizer from './Workspace/Customizer';
@@ -19,6 +18,7 @@ import FileSystem from './Workspace/FileSystem';
 import Libraries from './Workspace/Libraries';
 import Preview from './Workspace/Preview';
 import Sidebar from './Workspace/Sidebar';
+import { useOpenSCADProvider } from './providers/OpenscadWorkerProvider';
 
 const loopAnimation = {
   animation: 'spin 2s linear infinite',

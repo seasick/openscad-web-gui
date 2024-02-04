@@ -8,9 +8,9 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from './App';
-import FileSystemProvider from './components/FileSystemProvider';
 import Layout from './components/Layout';
-import OpenscadWorkerProvider from './components/OpenscadWorkerProvider';
+import FileSystemProvider from './components/providers/FileSystemProvider';
+import OpenscadWorkerProvider from './components/providers/OpenscadWorkerProvider';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -14,7 +14,7 @@ import * as React from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import FileWithPath from '../../lib/FileWithPath';
-import { useFileSystemProvider } from '../FileSystemProvider';
+import { useFileSystemProvider } from '../providers/FileSystemProvider';
 import ImportFromUrlDialog from './FileSystem/ImportDialog';
 import StyledTreeItem from './FileSystem/StyledTreeItem';
 

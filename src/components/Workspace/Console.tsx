@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import React, { useEffect } from 'react';
 
-import { useOpenSCADProvider } from '../OpenscadWorkerProvider';
+import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
 
 export default function Console() {
   const { log, resetLog } = useOpenSCADProvider();

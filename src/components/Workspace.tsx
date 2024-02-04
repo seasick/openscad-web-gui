@@ -4,7 +4,6 @@ import React, { useCallback, useEffect } from 'react';
 
 import { Parameter } from '../lib/openSCAD/parseParameter';
 import parseOpenScadParameters from '../lib/openSCAD/parseParameter';
-import { useOpenSCADProvider } from './OpenscadWorkerProvider';
 import Buttons from './Workspace/Buttons';
 import CodeEditor from './Workspace/CodeEditor';
 import Console from './Workspace/Console';
@@ -14,6 +13,7 @@ import Fonts from './Workspace/Fonts';
 import Libraries from './Workspace/Libraries';
 import Preview from './Workspace/Preview';
 import Sidebar from './Workspace/Sidebar';
+import { useOpenSCADProvider } from './providers/OpenscadWorkerProvider';
 
 export type EditorMode =
   | 'editor'

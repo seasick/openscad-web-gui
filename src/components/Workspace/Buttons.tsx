@@ -4,8 +4,8 @@ import Stack from '@mui/material/Stack';
 import React, { useEffect } from 'react';
 
 import { Parameter } from '../../lib/openSCAD/parseParameter';
-import { useOpenSCADProvider } from '../OpenscadWorkerProvider';
 import SplitButton from '../SplitButton';
+import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
 
 const loopAnimation = {
   animation: 'spin 2s linear infinite',

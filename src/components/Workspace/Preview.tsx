@@ -2,7 +2,7 @@ import { CircularProgress, useTheme } from '@mui/material';
 import React, { useMemo } from 'react';
 import { StlViewer } from 'react-stl-viewer';
 
-import { useOpenSCADProvider } from '../OpenscadWorkerProvider';
+import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
 
 const stlViewerStyle = {
   top: 0,

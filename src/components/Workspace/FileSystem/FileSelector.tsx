@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import React from 'react';
 
-import { useFileSystemProvider } from '../../FileSystemProvider';
+import { useFileSystemProvider } from '../../providers/FileSystemProvider';
 
 type Props = {
   onChange: (event: SelectChangeEvent<string>) => void;

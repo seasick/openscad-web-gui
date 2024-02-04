@@ -4,8 +4,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import React from 'react';
 
 import ErrorBox from './components/ErrorBox';
-import { useFileSystemProvider } from './components/FileSystemProvider';
 import Workspace from './components/Workspace';
+import { useFileSystemProvider } from './components/providers/FileSystemProvider';
 import useImport from './hooks/useImport';
 
 const MyBox = styled(Box)(({ theme }) => ({

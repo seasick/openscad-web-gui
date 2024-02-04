@@ -1,11 +1,11 @@
 import React, { createContext, useState } from 'react';
 
-import FileWithPath from '../lib/FileWithPath';
-import executeWorkerJob from '../lib/executeWorkerJob';
+import FileWithPath from '../../lib/FileWithPath';
+import executeWorkerJob from '../../lib/executeWorkerJob';
 import {
   FileSystemWorkerMessageData,
   WorkerMessageType,
-} from '../worker/types';
+} from '../../worker/types';
 
 type ContextType = {
   files: FileWithPath[];

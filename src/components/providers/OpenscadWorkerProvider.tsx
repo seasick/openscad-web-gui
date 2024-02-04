@@ -1,8 +1,11 @@
 import React, { createContext, useState } from 'react';
 
-import executeOpenSCAD from '../lib/openSCAD/execute';
-import { Parameter } from '../lib/openSCAD/parseParameter';
-import { OpenSCADWorkerMessageData, WorkerMessageType } from '../worker/types';
+import executeOpenSCAD from '../../lib/openSCAD/execute';
+import { Parameter } from '../../lib/openSCAD/parseParameter';
+import {
+  OpenSCADWorkerMessageData,
+  WorkerMessageType,
+} from '../../worker/types';
 
 // Create a context for the web worker
 const OpenSCADWorkerContext = createContext<{
