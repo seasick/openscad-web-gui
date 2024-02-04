@@ -1,26 +1,39 @@
 import { CircularProgress, useTheme } from '@mui/material';
-import React, { useMemo } from 'react';
-import { StlViewer } from 'react-stl-viewer';
+import React, { useEffect } from 'react';
+import * as THREE from 'three';
 
 import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
-
-const stlViewerStyle = {
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-};
+import ThreeJsCanvas from './Preview/ThreeJsCanvas';
+import readFromSTLFile from './Preview/readFromSTLFile';
 
 export default function Preview() {
   const { previewFile, isRendering } = useOpenSCADProvider();
+  const [geometry, setGeometry] = React.useState<THREE.Mesh | null>(null);
   const theme = useTheme();
 
-  const previewUrl = useMemo(() => {
+  useEffect(() => {
     if (!previewFile) {
-      return null;
+      return;
     }
 
-    return URL.createObjectURL(previewFile);
+    // Convert STL file to ThreeJS geometry
+    readFromSTLFile(previewFile).then((geometry) => {
+      const material = new THREE.MeshLambertMaterial({
+        color: theme.palette.primary.main,
+        flatShading: true,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.rotation.set(-Math.PI / 2, 0, 0); // z-up conversion
+
+      // Objects are way too big, scale them down.
+      mesh.scale.set(0.01, 0.01, 0.01);
+
+      mesh.traverse(function (child) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      });
+      setGeometry(mesh);
+    });
   }, [previewFile]);
 
   const loading = (
@@ -46,27 +59,17 @@ export default function Preview() {
     </div>
   );
 
-  if (!previewUrl && isRendering) {
+  if (!previewFile && isRendering) {
     return loading;
   }
 
-  if (!previewUrl) {
+  if (!previewFile) {
     return null;
   }
 
   return (
     <div style={{ height: '100%' }}>
-      {isRendering && loading}
-      <StlViewer
-        style={stlViewerStyle}
-        orbitControls
-        shadows
-        showAxes
-        modelProps={{
-          color: theme.palette.primary.main,
-        }}
-        url={previewUrl}
-      />
+      <ThreeJsCanvas geometry={geometry} />
     </div>
   );
 }
