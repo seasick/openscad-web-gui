@@ -161,7 +161,10 @@ export default function parseParameters(script: string): Parameter[] {
 
       const lastLineBeforeDefinition = splitted[0];
       if (lastLineBeforeDefinition.trim().startsWith('//')) {
-        description = lastLineBeforeDefinition.replace(/^\/\/\s*/, '');
+        description = lastLineBeforeDefinition.replace(/^\/\/\/*\s*/, '');
+        if (description.length === 0) {
+          description = undefined;
+        }
       }
 
       // Using names as keys to avoid duplicates
