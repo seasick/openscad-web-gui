@@ -37,11 +37,22 @@ export default function useImport(url?: string, autoImport = false) {
           files.map(async (file) => {
             const response = await fetch(file.url);
             const content = await response.arrayBuffer();
-            const name = file.name.split('?')[0]; // Strip possible query string from file name
+            let name = file.name.split('?')[0]; // Strip possible query string from file name
 
             // Check if the file extension is missing from the file name. If so,
             // try to guess it from the content type.
-            // TODO
+            if (!name.includes('.')) {
+              const contentType = response.headers.get('Content-Type');
+
+              if (contentType.startsWith('application/zip')) {
+                name += '.zip';
+              } else if (contentType.startsWith('text/plain')) {
+                name += '.scad';
+              } else {
+                // Everything else is SCAD too, for now.
+                name += '.scad';
+              }
+            }
 
             // If it is a scad file we can try to look if there are any libraries to import
             if (autoImport && name.endsWith('.scad')) {
