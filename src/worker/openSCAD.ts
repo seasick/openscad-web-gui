@@ -27,7 +27,7 @@ class OpenSCADWrapper {
       printErr: this.logger('stdErr'),
     });
     if (!defaultFont) {
-      const fontResponse = await fetch('/LiberationSans-Regular.ttf');
+      const fontResponse = await fetch('LiberationSans-Regular.ttf');
       defaultFont = await fontResponse.arrayBuffer();
     }
 
