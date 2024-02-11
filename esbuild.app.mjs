@@ -28,7 +28,12 @@ export default (opt_options) => {
         // if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
         resolveFrom: 'cwd',
         assets: {
-          from: ['./public/*.png', './public/*.ico', './public/*.webmanifest'],
+          from: [
+            './public/*.png',
+            './public/*.ico',
+            './public/*.webmanifest',
+            './public/*.ttf',
+          ],
           to: ['./dist'],
         },
         watch: true,

@@ -10,6 +10,8 @@ const fontsConf = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig></fontconfig>`;
 
+let defaultFont;
+
 class OpenSCADWrapper {
   log = {
     stdErr: [],
@@ -24,12 +26,22 @@ class OpenSCADWrapper {
       print: this.logger('stdOut'),
       printErr: this.logger('stdErr'),
     });
+    if (!defaultFont) {
+      const fontResponse = await fetch('/LiberationSans-Regular.ttf');
+      defaultFont = await fontResponse.arrayBuffer();
+    }
 
     // Make sure the root directory exists
     this.createDirectoryRecusive(instance, 'fonts');
 
     // Write the font.conf file
     instance.FS.writeFile('/fonts/fonts.conf', fontsConf);
+
+    // Add default font
+    instance.FS.writeFile(
+      'fonts/LiberationSans-Regular.ttf',
+      new Int8Array(defaultFont)
+    );
 
     for (const file of this.files) {
       // Make sure the directory of the file exists
