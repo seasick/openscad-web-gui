@@ -40,7 +40,7 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.7",
-    "@mui/x-tree-view": "^6.17.0",
+    "@mui/x-tree-view": "^7.1.0",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.16",
     "@zip.js/zip.js": "^2.7.36",
