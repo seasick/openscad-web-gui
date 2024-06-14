@@ -8,7 +8,7 @@ import { Alert, AlertTitle } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { TreeView } from '@mui/x-tree-view/TreeView';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { BlobReader, Uint8ArrayWriter, ZipReader } from '@zip.js/zip.js';
 import { enqueueSnackbar } from 'notistack';
 import * as React from 'react';
@@ -102,7 +102,7 @@ export default function FileSystem() {
         tree.push(
           <StyledTreeItem
             key={file.path}
-            nodeId={file.path}
+            itemId={file.path}
             labelText={file.name}
             labelIcon={FolderIcon}
           >
@@ -116,7 +116,7 @@ export default function FileSystem() {
         tree.push(
           <StyledTreeItem
             key={file.path}
-            nodeId={file.path}
+            itemId={file.path}
             labelText={file.name}
             endLabelAdornment={
               <IconButton onClick={handleDelete} data-name={file.name}>
@@ -156,18 +156,20 @@ export default function FileSystem() {
           overflowY: 'scroll',
         }}
       >
-        <TreeView
+        <SimpleTreeView
           {...getRootProps()}
           aria-label="File tree"
-          defaultExpanded={['3']}
-          defaultCollapseIcon={<ArrowDropDownIcon />}
-          defaultExpandIcon={<ArrowRightIcon />}
-          defaultEndIcon={<div style={{ width: 24 }} />}
+          defaultExpandedItems={['3']}
+          slots={{
+            endIcon: CustomEndIcon,
+            expandIcon: ArrowDropDownIcon,
+            collapseIcon: ArrowRightIcon,
+          }}
           sx={{ height: '100%', overflowY: 'scroll' }}
         >
           <input {...getInputProps()} />
           {createTree(recursiveTree(files))}
-        </TreeView>
+        </SimpleTreeView>
       </Box>
     </Box>
   );
@@ -199,4 +201,8 @@ function recursiveTree(files: WorkspaceFile[]): TreeItemStruct[] {
     }
   }
   return tree;
+}
+
+function CustomEndIcon() {
+  return <div style={{ width: 24 }} />;
 }
