@@ -17,6 +17,19 @@ build an editor for OpenSCAD that is capable of loading `.scad` files from other
 
 # Dev
 
+## Download openscad-wasm
+
+```bash
+cd scripts
+./get-openscad.sh
+```
+
+If that fails, you will want to go to https://files.openscad.org/playground/.  There should be two versions of openscad-wasm.  You want -web not -node.
+
+Once you have that url, you can alter get-openscad.sh to change it and run again.
+
+## Start the server in dev mode
+
 ```bash
 git clone https://github.com/seasick/openscad-web-gui
 npm i

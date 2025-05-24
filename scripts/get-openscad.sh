@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 DIST_DIR=$SCRIPT_DIR/../dist
 VENDOR_DIR=$SCRIPT_DIR/../src/vendor/openscad-wasm
-OPENSCAD_WASM_URL=https://files.openscad.org/playground/OpenSCAD-2023.08.13.wasm16037-WebAssembly.zip
+OPENSCAD_WASM_URL=https://files.openscad.org/playground/OpenSCAD-2025.03.25.wasm24456-WebAssembly-web.zip
 
 mkdir -p $VENDOR_DIR
 mkdir -p $DIST_DIR
