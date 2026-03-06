@@ -26,17 +26,19 @@ export default function ThreeJsCanvas({ geometry }: Props) {
       id="editor-canvas"
       shadows
       camera={{
-        fov: 35,
+        fov: 45,
         zoom: 1.3,
         near: 0.1,
-        far: 1000,
-        position: [6, 6, 6],
+        far: 2000,
+        position: [100, 100, 100],
       }}
       frameloop="demand"
     >
       <CameraControls ref={cameraControlRef} />
       <Environment />
-      <Model geometry={geometry} />
+      
+      {geometry && <Model geometry={geometry} />}
+      
       <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
         <GizmoViewcube
           onClick={(e) => {

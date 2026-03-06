@@ -6,6 +6,7 @@
 
 # Environment variables
 .env
+settings.local.json
 
 # Editor directories and files
 /.vscode

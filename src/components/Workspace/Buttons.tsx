@@ -40,9 +40,9 @@ export default function Buttons({ code, parameters }: Props) {
   const options = useMemo(() => {
     const isSVG = previewFile && previewFile.name.endsWith('.svg');
 
-    // TODO: 3MF export was not enabled when building the OpenSCAD wasm module
     return [
       { label: 'Export STL', disabled: isSVG },
+      { label: 'Export 3MF', disabled: isSVG },
       { label: 'Export OFF', disabled: isSVG },
       { label: 'Export AMF', disabled: isSVG },
       { label: 'Export CSG', disabled: isSVG },

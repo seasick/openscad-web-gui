@@ -191,9 +191,9 @@ export default function Editor({ url, initialMode }: Props) {
               disabled={isRendering || isExporting || !previewFile}
               options={[
                 'Export STL',
+                'Export 3MF',
                 'Export OFF',
                 'Export AMF',
-                // 'Export 3MF', // TODO: 3MF export was not enabled when building the OpenSCAD wasm module
                 'Export CSG',
                 'Export DXF',
                 'Export SVG',

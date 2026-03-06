@@ -3,6 +3,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "types": ["node", "jest"]
   },
   "exclude": [
     "**/*.spec.ts",

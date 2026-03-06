@@ -1,13 +1,10 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-DIST_DIR=$SCRIPT_DIR/../dist
 VENDOR_DIR=$SCRIPT_DIR/../src/vendor/openscad-wasm
-OPENSCAD_WASM_URL=https://files.openscad.org/playground/OpenSCAD-2023.08.13.wasm16037-WebAssembly.zip
+WASM_BASE_URL=https://raw.githubusercontent.com/mikekuniavsky/openscad-wasm-debug/main/test-server/tests
 
 mkdir -p $VENDOR_DIR
-mkdir -p $DIST_DIR
 
-
-wget $OPENSCAD_WASM_URL -O $VENDOR_DIR/openscad-wasm.zip
-unzip $VENDOR_DIR/openscad-wasm.zip -d $VENDOR_DIR/
+curl -L "$WASM_BASE_URL/openscad.js" -o "$VENDOR_DIR/openscad.js"
+curl -L "$WASM_BASE_URL/openscad.wasm" -o "$VENDOR_DIR/openscad.wasm"

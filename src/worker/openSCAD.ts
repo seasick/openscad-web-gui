@@ -106,7 +106,9 @@ class OpenSCADWrapper {
       return `-D${name}=${value}`;
     });
 
-    parameters.push('--export-format=binstl');
+    // Use 3MF format for colored output, binary STL as fallback
+    const exportFormat = data.fileType.toLowerCase() === '3mf' ? '3mf' : 'binstl';
+    parameters.push(`--export-format=${exportFormat}`);
     parameters.push(`--enable=manifold`);
     parameters.push(`--enable=fast-csg`);
     parameters.push(`--enable=lazy-union`);
@@ -137,8 +139,10 @@ class OpenSCADWrapper {
       })
       .filter((x) => !!x);
 
+    // Use 3MF format for colored preview, binary STL as fallback
+    const exportFormat = data.fileType.toLowerCase() === '3mf' ? '3mf' : 'binstl';
     const exportParams = [
-      '--export-format=binstl',
+      `--export-format=${exportFormat}`,
       '--enable=manifold',
       '--enable=fast-csg',
       '--enable=lazy-union',

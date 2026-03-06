@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { useOpenSCADProvider } from '../providers/OpenscadWorkerProvider';
 import ThreeJsCanvas from './Preview/ThreeJsCanvas';
 import readFromSTLFile from './Preview/readFromSTLFile';
+import { readFrom3MFFile } from './Preview/readFrom3MFFile';
 import readFromSVGFile from './Preview/readFromSVGFile';
 
 export default function Preview() {
@@ -25,6 +26,9 @@ export default function Preview() {
           previewFile,
           theme.palette.primary.main
         );
+      } else if (previewFile.name.endsWith('.3mf')) {
+        const arrayBuffer = await previewFile.arrayBuffer();
+        newGeometry = await readFrom3MFFile(arrayBuffer);
       } else if (previewFile.name.endsWith('.svg')) {
         newGeometry = await readFromSVGFile(
           previewFile,

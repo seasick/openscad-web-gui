@@ -86,7 +86,7 @@ export default function OpenscadWorkerProvider({ children }: Props) {
       const output = await executeOpenSCAD(
         WorkerMessageType.PREVIEW,
         code,
-        'stl',
+        '3mf',
         params
       );
 
